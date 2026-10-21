@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Users, ShieldCheck, Clock, MapPin, Car } from 'lucide-react';
+import { Users, ShieldCheck, Clock, MapPin, Car, MessageCircle, ArrowRight } from 'lucide-react';
 import { FLEET_DATA } from '../data/fleetData';
 import { createWhatsAppQuickUrl } from '../utils/whatsapp';
 import './Fleet.css';
@@ -75,13 +75,19 @@ export default function Fleet() {
 
                     <p className="vehicle-tagline-text">{vehicle.description}</p>
 
-                    <Link
-                      to="/booking"
-                      state={{ prefill: { preferredVehicle: vehicle.name } }}
+                    <a
+                      href={`https://wa.me/919035897960?text=${encodeURIComponent(
+                        `Hello SKB Tour and Travels, I am interested in booking the ${vehicle.name}. Please share availability and pricing.`
+                      )}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="btn-enquire-now-pill"
+                      aria-label={`Enquire about ${vehicle.name} on WhatsApp`}
                     >
-                      Enquire Now
-                    </Link>
+                      <MessageCircle size={16} />
+                      <span>Enquire Now</span>
+                      <ArrowRight size={14} />
+                    </a>
                   </div>
                 </div>
               );
@@ -90,36 +96,48 @@ export default function Fleet() {
         </div>
       </section>
 
-      {/* 3. Bottom Feature Badges Strip (Dark Navy) */}
-      <section className="fleet-bottom-strip-navy" aria-label="Fleet Service Commitments">
+      {/* 3. Bottom Feature Commitments Strip (Warm Cream & White Luxury Card) */}
+      <section className="fleet-commitments-section" aria-label="Fleet Service Commitments">
         <div className="container">
-          <div className="fleet-commitments-row">
+          <div className="fleet-commitments-card">
             <div className="commitment-item">
-              <div className="commitment-icon-circle">
-                <ShieldCheck size={20} className="text-gold" />
+              <div className="commitment-icon-bubble">
+                <ShieldCheck size={22} className="commitment-icon" />
               </div>
-              <span>Well Maintained Vehicles</span>
+              <div className="commitment-text">
+                <h4 className="commitment-title">Well Maintained Vehicles</h4>
+                <p className="commitment-sub">Clean, safe & reliable</p>
+              </div>
             </div>
 
             <div className="commitment-item">
-              <div className="commitment-icon-circle">
-                <Car size={20} className="text-gold" />
+              <div className="commitment-icon-bubble">
+                <Car size={22} className="commitment-icon" />
               </div>
-              <span>Experienced Drivers</span>
+              <div className="commitment-text">
+                <h4 className="commitment-title">Experienced Drivers</h4>
+                <p className="commitment-sub">Professional & polite</p>
+              </div>
             </div>
 
             <div className="commitment-item">
-              <div className="commitment-icon-circle">
-                <MapPin size={20} className="text-gold" />
+              <div className="commitment-icon-bubble">
+                <MapPin size={22} className="commitment-icon" />
               </div>
-              <span>All India Travel</span>
+              <div className="commitment-text">
+                <h4 className="commitment-title">All India Travel</h4>
+                <p className="commitment-sub">Local & PAN India</p>
+              </div>
             </div>
 
             <div className="commitment-item">
-              <div className="commitment-icon-circle">
-                <Clock size={20} className="text-gold" />
+              <div className="commitment-icon-bubble">
+                <Clock size={22} className="commitment-icon" />
               </div>
-              <span>24/7 Support</span>
+              <div className="commitment-text">
+                <h4 className="commitment-title">24/7 Support</h4>
+                <p className="commitment-sub">Round-the-clock booking</p>
+              </div>
             </div>
           </div>
         </div>

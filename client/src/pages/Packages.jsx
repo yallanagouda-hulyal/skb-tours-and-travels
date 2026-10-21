@@ -6,6 +6,8 @@ import {
   ShieldCheck,
   CheckCircle,
   Sparkles,
+  Phone,
+  MessageCircle,
 } from 'lucide-react';
 import './Packages.css';
 
@@ -23,7 +25,7 @@ export default function Packages() {
 
           <div className="packages-banner-right">
             <img
-              src="/assets/images/airport-hero-banner.png"
+              src="/assets/images/hero-airport-uhd.jpg"
               alt="SKB Travel Packages Fleet"
               className="packages-banner-fleet-img"
             />
@@ -149,53 +151,166 @@ export default function Packages() {
         </div>
       </section>
 
-      {/* 3. Included in Our Packages Strip (White Strip) */}
+      {/* 3. Included in Our Packages Strip (Warm Cream & White Card Theme) */}
       <section className="included-strip-section" aria-label="Included In Our Packages">
         <div className="container">
-          <h3 className="included-title">Included in Our Packages</h3>
-          <div className="included-items-row">
-            <div className="included-item">
-              <div className="inc-icon-circle"><Car size={18} className="text-gold" /></div>
-              <span>AC & Non-AC Vehicles</span>
+          <div className="included-header-center">
+            <div className="included-tagline-gold">
+              <span className="tagline-dash" />
+              <span>STANDARD WITH EVERY TRIP</span>
+              <span className="tagline-dash" />
             </div>
-            <div className="included-item">
-              <div className="inc-icon-circle"><ShieldCheck size={18} className="text-gold" /></div>
-              <span>Professional Drivers</span>
+            <h3 className="included-title">
+              Included in <span className="included-gold-serif">Our Packages</span>
+            </h3>
+            <div className="included-gold-underline" />
+          </div>
+
+          <div className="included-cards-grid">
+            <div className="included-feature-card">
+              <div className="inc-icon-bubble">
+                <Car size={22} className="inc-icon-navy" />
+              </div>
+              <div className="inc-card-content">
+                <h4 className="inc-card-title">AC & Non-AC Vehicles</h4>
+                <p className="inc-card-desc">Sedans, Innova Crysta, TT & Urbania</p>
+              </div>
             </div>
-            <div className="included-item">
-              <div className="inc-icon-circle"><Clock size={18} className="text-gold" /></div>
-              <span>24/7 Support</span>
+
+            <div className="included-feature-card">
+              <div className="inc-icon-bubble">
+                <ShieldCheck size={22} className="inc-icon-navy" />
+              </div>
+              <div className="inc-card-content">
+                <h4 className="inc-card-title">Professional Drivers</h4>
+                <p className="inc-card-desc">Verified, polite & highway-experienced</p>
+              </div>
             </div>
-            <div className="included-item">
-              <div className="inc-icon-circle"><Sparkles size={18} className="text-gold" /></div>
-              <span>Clean & Safe Travel</span>
+
+            <div className="included-feature-card">
+              <div className="inc-icon-bubble">
+                <Clock size={22} className="inc-icon-navy" />
+              </div>
+              <div className="inc-card-content">
+                <h4 className="inc-card-title">24/7 Support</h4>
+                <p className="inc-card-desc">Real-time flight tracking & helpdesk</p>
+              </div>
+            </div>
+
+            <div className="included-feature-card">
+              <div className="inc-icon-bubble">
+                <Sparkles size={22} className="inc-icon-navy" />
+              </div>
+              <div className="inc-card-content">
+                <h4 className="inc-card-title">Clean & Safe Travel</h4>
+                <p className="inc-card-desc">Sanitized interiors & luggage assistance</p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 4. Pricing Conditions (2-column layout with car photo on right) */}
+      {/* 4. Pricing Conditions (Luxury Split Card with High-Res Frame) */}
       <section className="pricing-conditions-section" aria-label="Pricing Conditions">
         <div className="container">
-          <div className="conditions-split-grid">
+          <div className="conditions-luxury-card">
             <div className="conditions-left-list">
-              <h3 className="conditions-heading">Pricing Conditions</h3>
-              <ul className="conditions-bullet-points">
-                <li><span className="bullet-dot">•</span> Toll charges are separate and not included</li>
-                <li><span className="bullet-dot">•</span> Parking and other charges (if any) are extra</li>
-                <li><span className="bullet-dot">•</span> Final fare depends on route, vehicle, date and travel conditions</li>
-                <li><span className="bullet-dot">•</span> Minimum 300 KM per day average for outstation trips</li>
-                <li><span className="bullet-dot">•</span> Driver charges for night travel: ₹400 (separate)</li>
-                <li><span className="bullet-dot">•</span> Please confirm the final fare and availability before the journey</li>
-              </ul>
+              <div className="conditions-header-block">
+                <span className="conditions-tagline-gold">TRANSPARENT BILLING</span>
+                <h3 className="conditions-heading">
+                  Pricing <span className="conditions-gold-serif">Conditions</span>
+                </h3>
+                <p className="conditions-sub-info">
+                  We believe in 100% fare clarity with zero hidden surprises. Every trip condition is communicated upfront.
+                </p>
+              </div>
+
+              <div className="conditions-items-grid">
+                <div className="condition-item-pill">
+                  <span className="cond-check-bullet">✓</span>
+                  <div>
+                    <strong>Tolls & FASTag:</strong>
+                    <span> Toll plaza charges are separate and billed at actuals.</span>
+                  </div>
+                </div>
+
+                <div className="condition-item-pill">
+                  <span className="cond-check-bullet">✓</span>
+                  <div>
+                    <strong>Parking & Permits:</strong>
+                    <span> Airport/mall parking and interstate border permits are extra.</span>
+                  </div>
+                </div>
+
+                <div className="condition-item-pill">
+                  <span className="cond-check-bullet">✓</span>
+                  <div>
+                    <strong>Final Binding Fare:</strong>
+                    <span> Fare depends on exact route, preferred vehicle & travel dates.</span>
+                  </div>
+                </div>
+
+                <div className="condition-item-pill">
+                  <span className="cond-check-bullet">✓</span>
+                  <div>
+                    <strong>Outstation Average:</strong>
+                    <span> Standard minimum 300 KM per day billing for outstation journeys.</span>
+                  </div>
+                </div>
+
+                <div className="condition-item-pill">
+                  <span className="cond-check-bullet">✓</span>
+                  <div>
+                    <strong>Driver Night Allowance:</strong>
+                    <span> ₹400 night allowance applicable between 10:00 PM and 6:00 AM.</span>
+                  </div>
+                </div>
+
+                <div className="condition-item-pill">
+                  <span className="cond-check-bullet">✓</span>
+                  <div>
+                    <strong>Prior Confirmation:</strong>
+                    <span> Please confirm vehicle availability and written quote with Vicky.</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="conditions-action-row">
+                <a
+                  href="tel:9035897960"
+                  className="cond-call-btn"
+                  aria-label="Call Vicky on 9035897960"
+                >
+                  <Phone size={16} />
+                  <span>Call: +91 90358 97960</span>
+                </a>
+                <a
+                  href={`https://wa.me/919035897960?text=${encodeURIComponent(
+                    'Hello Vicky, I would like to confirm pricing and vehicle availability for my journey.'
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="cond-wa-btn"
+                  aria-label="Enquire on WhatsApp"
+                >
+                  <MessageCircle size={16} />
+                  <span>WhatsApp Quote</span>
+                </a>
+              </div>
             </div>
 
             <div className="conditions-right-img">
-              <img
-                src="/assets/images/card-sedan.png"
-                alt="SKB Travels Car"
-                className="conditions-car-photo"
-              />
+              <div className="conditions-img-frame">
+                <img
+                  src="/assets/images/card-sedan.png"
+                  alt="SKB Travels Fleet"
+                  className="conditions-car-photo"
+                />
+                <div className="conditions-float-badge">
+                  <CheckCircle size={15} />
+                  <span>100% Fare Transparency</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>

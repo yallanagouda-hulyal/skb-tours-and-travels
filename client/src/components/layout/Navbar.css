@@ -164,7 +164,8 @@
 }
 
 .drawer-open {
-  max-height: 360px;
+  max-height: 480px;
+  overflow-y: auto;
 }
 
 .mobile-nav-list {
@@ -209,5 +210,14 @@
   }
   .mobile-nav-drawer-white {
     display: block;
+  }
+}
+
+@media (max-width: 560px) {
+  .navbar-actions .btn-book-gold {
+    display: none;
+  }
+  .brand-name-dark {
+    font-size: 1.05rem;
   }
 }

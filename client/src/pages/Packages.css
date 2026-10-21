@@ -55,10 +55,16 @@
 
 .packages-banner-fleet-img {
   width: 100%;
-  height: auto;
-  border-radius: var(--radius-md);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  height: 240px;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), 0 0 25px rgba(231, 184, 77, 0.15);
+  border: 1.5px solid rgba(231, 184, 77, 0.4);
   object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.packages-banner-right:hover .packages-banner-fleet-img {
+  transform: scale(1.02);
 }
 
 /* 2. Four Pricing Cards Grid */
@@ -208,96 +214,301 @@
   background: linear-gradient(135deg, #f1c765 0%, #E7B84D 100%);
 }
 
-/* 3. Included Strip (White) */
+/* 3. Included in Our Packages Strip (Warm Cream & White Luxury Cards) */
 .included-strip-section {
-  padding: 2.25rem 0;
-  background: #ffffff;
-  border-top: 1px solid #e2e8f0;
-  border-bottom: 1px solid #e2e8f0;
+  padding: 4.5rem 0 5rem;
+  background: #FAF6EE;
+  border-top: 1px solid rgba(231, 184, 77, 0.25);
+  border-bottom: 1px solid rgba(231, 184, 77, 0.25);
+}
+
+.included-header-center {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 2.75rem;
+}
+
+.included-tagline-gold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  color: #C58A18;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
 }
 
 .included-title {
-  font-size: 1.15rem;
-  font-weight: 800;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(2rem, 3.4vw, 2.75rem);
+  font-weight: 700;
   color: #071426;
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.01em;
 }
 
-.included-items-row {
+.included-gold-serif {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700;
+  color: #C58A18;
+  background: linear-gradient(135deg, #E7B84D 0%, #C58A18 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.included-gold-underline {
+  width: 74px;
+  height: 2.5px;
+  margin: 0 auto;
+  background: linear-gradient(90deg, transparent, #E7B84D, #C58A18, #E7B84D, transparent);
+  border-radius: 2px;
+}
+
+.included-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.included-feature-card {
+  background: #FFFFFF;
+  border: 1.5px solid rgba(231, 184, 77, 0.35);
+  border-radius: 18px;
+  padding: 1.75rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(7, 20, 38, 0.04);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s ease;
+}
+
+.included-feature-card:hover {
+  transform: translateY(-5px);
+  border-color: #E7B84D;
+  box-shadow: 0 14px 32px rgba(197, 138, 24, 0.16), 0 3px 10px rgba(7, 20, 38, 0.04);
+}
+
+.inc-icon-bubble {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #FEF5E1 0%, #FDE9BE 100%);
+  border: 1.5px solid #E7B84D;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  margin-bottom: 1.15rem;
+  box-shadow: 0 4px 12px rgba(197, 138, 24, 0.16);
+  transition: all 0.25s ease;
+}
+
+.inc-icon-navy {
+  color: #071426;
+  transition: color 0.25s ease;
+}
+
+.included-feature-card:hover .inc-icon-bubble {
+  background: #071426;
+  border-color: #E7B84D;
+  transform: scale(1.08);
+}
+
+.included-feature-card:hover .inc-icon-navy {
+  color: #E7B84D;
+}
+
+.inc-card-title {
+  font-family: var(--font-heading);
+  font-size: 1.02rem;
+  font-weight: 800;
+  color: #071426;
+  margin-bottom: 0.35rem;
+  line-height: 1.3;
+}
+
+.inc-card-desc {
+  font-size: 0.84rem;
+  color: #64748B;
+  margin: 0;
+  line-height: 1.45;
+}
+
+/* 4. Pricing Conditions Section (Luxury Floating Card) */
+.pricing-conditions-section {
+  padding: 4.5rem 0 5.5rem;
+  background: #F8FAFC;
+}
+
+.conditions-luxury-card {
+  background: #FFFFFF;
+  border: 1.5px solid rgba(231, 184, 77, 0.45);
+  border-radius: 24px;
+  padding: 3rem 3.25rem;
+  box-shadow: 0 16px 45px rgba(7, 20, 38, 0.08), 0 0 25px rgba(231, 184, 77, 0.08);
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.conditions-header-block {
+  margin-bottom: 1.75rem;
+}
+
+.conditions-tagline-gold {
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: #C58A18;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+.conditions-heading {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.85rem, 3vw, 2.4rem);
+  font-weight: 700;
+  color: #071426;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+
+.conditions-gold-serif {
+  color: #C58A18;
+  font-style: italic;
+  background: linear-gradient(135deg, #E7B84D 0%, #C58A18 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.conditions-sub-info {
+  font-size: 0.92rem;
+  color: #64748B;
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* 6 Grid of Condition Items */
+.conditions-items-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.85rem;
+  margin-bottom: 2rem;
+}
+
+.condition-item-pill {
+  background: #FAF6EE;
+  border: 1px solid rgba(231, 184, 77, 0.4);
+  border-radius: 12px;
+  padding: 0.85rem 1rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  font-size: 0.84rem;
+  color: #334155;
+  line-height: 1.45;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.condition-item-pill:hover {
+  transform: translateY(-2px);
+  border-color: #E7B84D;
+  background: #FFF8E8;
+}
+
+.cond-check-bullet {
+  color: #10B981;
+  font-weight: 800;
+  font-size: 0.95rem;
+  line-height: 1.2;
+  flex-shrink: 0;
+}
+
+.condition-item-pill strong {
+  color: #071426;
+  font-weight: 750;
+  display: block;
+  margin-bottom: 0.1rem;
+}
+
+/* Action Row (Call & WhatsApp) */
+.conditions-action-row {
+  display: flex;
+  align-items: center;
   gap: 1rem;
   flex-wrap: wrap;
 }
 
-.included-item {
-  display: flex;
-  align-items: center;
-  gap: 0.65rem;
+.cond-call-btn {
+  background: #071426;
+  color: #E7B84D;
+  border: 1.5px solid rgba(231, 184, 77, 0.65);
   font-size: 0.88rem;
-  font-weight: 600;
-  color: #071426;
-}
-
-.inc-icon-circle {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: #fdfaf0;
-  border: 1px solid rgba(231, 184, 77, 0.35);
-  display: flex;
+  font-weight: 750;
+  padding: 0.75rem 1.35rem;
+  border-radius: 50px;
+  text-decoration: none;
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
+  gap: 0.55rem;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 14px rgba(7, 20, 38, 0.2);
 }
 
-/* 4. Pricing Conditions Section (2 columns) */
-.pricing-conditions-section {
-  padding: 3rem 0 4rem;
-  background: #F7F9FC;
+.cond-call-btn:hover {
+  background: #0d223f;
+  color: #FFFFFF;
+  border-color: #E7B84D;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(7, 20, 38, 0.35);
 }
 
-.conditions-split-grid {
-  display: grid;
-  grid-template-columns: 1.3fr 1fr;
-  gap: 2.5rem;
+.cond-wa-btn {
+  background: #25D366;
+  color: #FFFFFF;
+  font-size: 0.88rem;
+  font-weight: 750;
+  padding: 0.75rem 1.35rem;
+  border-radius: 50px;
+  text-decoration: none;
+  display: inline-flex;
   align-items: center;
+  gap: 0.55rem;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.25);
 }
 
-.conditions-heading {
-  font-size: 1.25rem;
-  font-weight: 800;
-  color: #071426;
-  margin-bottom: 1.25rem;
+.cond-wa-btn:hover {
+  background: #1eb956;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(37, 211, 102, 0.38);
 }
 
-.conditions-bullet-points {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 0.65rem;
-}
-
-.conditions-bullet-points li {
-  font-size: 0.86rem;
-  color: #475569;
-  line-height: 1.5;
-  display: flex;
-  align-items: flex-start;
-  gap: 0.45rem;
-}
-
-.bullet-dot {
-  color: var(--color-gold);
-  font-size: 1.2rem;
-  line-height: 0.9;
-}
-
+/* Right Vehicle Frame with Luxury Badge */
 .conditions-right-img {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.conditions-img-frame {
+  position: relative;
+  background: linear-gradient(135deg, #071426 0%, #0d223f 100%);
+  border: 1.5px solid rgba(231, 184, 77, 0.45);
+  border-radius: 20px;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 14px 35px rgba(7, 20, 38, 0.2);
+  width: 100%;
 }
 
 .conditions-car-photo {
@@ -305,6 +516,27 @@
   max-width: 380px;
   height: auto;
   object-fit: contain;
+  transition: transform 0.35s ease;
+}
+
+.conditions-img-frame:hover .conditions-car-photo {
+  transform: scale(1.04);
+}
+
+.conditions-float-badge {
+  position: absolute;
+  bottom: -14px;
+  background: #E7B84D;
+  color: #071426;
+  font-size: 0.76rem;
+  font-weight: 800;
+  padding: 0.4rem 1rem;
+  border-radius: 50px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border: 1px solid #FFFFFF;
 }
 
 /* Responsive */
@@ -315,13 +547,33 @@
   .pricing-cards-grid-4 {
     grid-template-columns: repeat(2, 1fr);
   }
-  .conditions-split-grid {
+  .included-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .conditions-luxury-card {
     grid-template-columns: 1fr;
+    padding: 2.25rem 2rem;
+    gap: 2.5rem;
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 640px) {
   .pricing-cards-grid-4 {
     grid-template-columns: 1fr;
+  }
+  .included-cards-grid {
+    grid-template-columns: 1fr;
+  }
+  .conditions-items-grid {
+    grid-template-columns: 1fr;
+  }
+  .conditions-action-row {
+    flex-direction: column;
+    width: 100%;
+  }
+  .cond-call-btn,
+  .cond-wa-btn {
+    width: 100%;
+    justify-content: center;
   }
 }
