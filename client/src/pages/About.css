@@ -1,299 +1,188 @@
 /* ==========================================================================
-   PAGE 5: ABOUT US STYLES
+   PAGE 5: ABOUT US STYLES (MATCHING TARGET DESIGN)
    ========================================================================== */
 
 .about-page-root {
+  background-color: #F7F9FC;
+  color: #071426;
   overflow-x: hidden;
 }
 
-/* 1. Hero Editorial */
-.about-hero-section {
-  background: linear-gradient(180deg, #051121 0%, var(--color-navy) 100%);
-  padding: 5.5rem 0 3.5rem;
+/* 1. Header Banner */
+.about-banner-navy {
+  background: linear-gradient(135deg, #071426 0%, #0d223f 70%, #071426 100%);
+  color: #F7F9FC;
+  padding: 3.5rem 0 2.5rem;
+  border-bottom: 2px solid rgba(231, 184, 77, 0.25);
 }
 
-.about-hero-editorial {
-  max-width: 840px;
-}
-
-.about-hero-headline {
-  font-size: clamp(2.4rem, 5.5vw, 3.8rem);
-  font-weight: 800;
-  line-height: 1.15;
-  color: var(--color-pearl);
-  margin-top: 1rem;
-  margin-bottom: 0.5rem;
-}
-
-.about-hero-lead {
-  font-size: 1.15rem;
-  line-height: 1.7;
-  color: var(--color-pearl-muted);
-}
-
-/* 2. Visual Story Grid */
-.story-section {
-  background: var(--color-navy);
-}
-
-.story-split-grid {
+.about-banner-grid {
   display: grid;
-  grid-template-columns: 1fr 1.1fr;
-  gap: 4rem;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 2rem;
   align-items: center;
 }
 
-.editorial-img-frame {
-  position: relative;
-  border-radius: var(--radius-xl);
-  overflow: hidden;
-  border: 1.5px solid var(--color-gold-border);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
-  background: #040c17;
+.about-main-heading {
+  font-family: 'Times New Roman', Times, serif, var(--font-heading);
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.15;
+  color: #F7F9FC;
+  margin-bottom: 1rem;
 }
 
-.editorial-img {
+.about-gold-text {
+  color: var(--color-gold);
+}
+
+.about-main-desc {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #b8c7db;
+  max-width: 500px;
+  margin-bottom: 2rem;
+}
+
+.btn-plan-journey-gold {
+  display: inline-block;
+  background: linear-gradient(135deg, #E7B84D 0%, #cfa038 100%);
+  color: #071426;
+  font-weight: 700;
+  font-size: 0.92rem;
+  padding: 0.75rem 1.8rem;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.btn-plan-journey-gold:hover {
+  background: linear-gradient(135deg, #f1c765 0%, #E7B84D 100%);
+}
+
+.about-banner-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-palace-fleet-img {
   width: 100%;
-  height: 480px;
+  height: auto;
+  border-radius: var(--radius-md);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   object-fit: cover;
 }
 
-.editorial-caption-glass {
-  position: absolute;
-  bottom: 1.5rem;
-  left: 1.5rem;
-  right: 1.5rem;
-  background: rgba(7, 20, 38, 0.88);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid var(--color-gold-border);
-  border-radius: var(--radius-md);
-  padding: 1rem 1.25rem;
+/* 2. Our Services Strip (White) */
+.about-services-strip {
+  padding: 2.5rem 0;
+  background: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
 }
 
-.caption-tag {
-  font-size: 0.72rem;
+.about-strip-heading {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: #071426;
+  margin-bottom: 1.75rem;
+}
+
+.about-services-5-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.25rem;
+}
+
+.about-service-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.65rem;
+}
+
+.about-icon-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #fdfaf0;
+  border: 1px solid rgba(231, 184, 77, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.about-service-text h4 {
+  font-size: 0.92rem;
   font-weight: 700;
-  text-transform: uppercase;
-  color: var(--color-gold);
-  letter-spacing: 0.06em;
-  display: block;
+  color: #071426;
+  line-height: 1.2;
   margin-bottom: 0.2rem;
 }
 
-.caption-text {
-  font-size: 0.85rem;
-  color: var(--color-pearl);
-}
-
-.story-heading {
-  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
-  font-weight: 800;
-  color: var(--color-pearl);
-  margin-bottom: 0.5rem;
-}
-
-.story-paragraph {
-  font-size: 0.98rem;
-  line-height: 1.7;
-  color: var(--color-pearl-muted);
-  margin-bottom: 1.25rem;
-}
-
-.story-paragraph strong {
-  color: var(--color-pearl);
-}
-
-.story-paragraph em {
-  color: var(--color-gold);
-  font-style: normal;
-}
-
-.values-checklist {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-top: 1.75rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.val-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.85rem;
-  font-size: 0.9rem;
-  line-height: 1.55;
-  color: var(--color-pearl-muted);
-}
-
-.val-item strong {
-  color: var(--color-pearl);
-}
-
-/* 3. Pillars Section */
-.pillars-section {
-  background: #040c17;
-}
-
-.pillars-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
-}
-
-.pillar-card {
-  padding: 2.25rem 1.75rem;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
-.pillar-icon-box {
-  width: 52px;
-  height: 52px;
-  border-radius: var(--radius-md);
-  background: rgba(231, 184, 77, 0.1);
-  border: 1px solid var(--color-gold-border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1.25rem;
-}
-
-.pillar-title {
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: var(--color-pearl);
-  margin-bottom: 0.75rem;
-}
-
-.pillar-desc {
-  font-size: 0.88rem;
-  line-height: 1.6;
-  color: var(--color-pearl-muted);
-}
-
-/* 4. Owner Commitment Section */
-.owner-commitment-section {
-  background: var(--color-navy);
-}
-
-.owner-card {
-  background: linear-gradient(135deg, rgba(13, 34, 63, 0.8) 0%, rgba(7, 20, 38, 0.98) 100%);
-  border: 1.5px solid var(--color-gold-border);
-  border-radius: var(--radius-xl);
-  padding: 4rem 3rem;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65);
-}
-
-.owner-content-wrap {
-  max-width: 820px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.owner-badge-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: rgba(231, 184, 77, 0.12);
-  border: 1px solid var(--color-gold-border);
-  padding: 0.35rem 0.85rem;
-  border-radius: var(--radius-full);
+.about-service-text p {
   font-size: 0.78rem;
-  font-weight: 700;
-  color: var(--color-gold);
-  text-transform: uppercase;
-  margin-bottom: 1rem;
+  color: #64748b;
+  line-height: 1.4;
 }
 
-.owner-card-headline {
-  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+/* 3. Your Trusted Travel Partner (Left text, right image) */
+.trusted-partner-section {
+  padding: 3.5rem 0 4.5rem;
+  background: #F7F9FC;
+}
+
+.trusted-partner-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.trusted-heading {
+  font-size: 1.85rem;
   font-weight: 800;
-  color: var(--color-pearl);
+  color: #071426;
   margin-bottom: 1rem;
 }
 
-.owner-card-text {
-  font-size: 1.05rem;
+.trusted-paragraph {
+  font-size: 0.95rem;
   line-height: 1.65;
-  color: var(--color-pearl-muted);
-  margin-bottom: 2.25rem;
+  color: #475569;
+  margin-bottom: 2rem;
+  max-width: 520px;
 }
 
-.owner-details-row {
+.trusted-right-img {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 2.5rem;
-  background: rgba(4, 12, 23, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.mountain-car-img {
+  width: 100%;
+  max-width: 450px;
+  height: auto;
   border-radius: var(--radius-md);
-  padding: 1.25rem 2rem;
-  margin-bottom: 2.5rem;
-  flex-wrap: wrap;
-}
-
-.owner-detail-item {
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
-}
-
-.detail-label {
-  font-size: 0.72rem;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--color-pearl-muted);
-}
-
-.detail-val {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: var(--color-pearl);
-}
-
-a.detail-val:hover {
-  color: var(--color-gold);
-}
-
-.owner-cta-wrap {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1.25rem;
-  flex-wrap: wrap;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+  object-fit: cover;
 }
 
 /* Responsive */
 @media (max-width: 1024px) {
-  .story-split-grid {
+  .about-banner-grid,
+  .trusted-partner-grid {
     grid-template-columns: 1fr;
-    gap: 3rem;
   }
-
-  .editorial-img {
-    height: 380px;
-  }
-
-  .pillars-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .about-services-5-row {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
 @media (max-width: 640px) {
-  .pillars-grid {
+  .about-services-5-row {
     grid-template-columns: 1fr;
-  }
-
-  .owner-card {
-    padding: 2.5rem 1.25rem;
-  }
-
-  .owner-details-row {
-    flex-direction: column;
-    gap: 1rem;
-    padding: 1rem;
   }
 }

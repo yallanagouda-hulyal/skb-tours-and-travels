@@ -1,251 +1,125 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import {
-  Car,
-  Users,
-  Check,
-  ArrowRight,
-  ShieldCheck,
-  MessageSquare,
-  Sparkles,
-  Info,
-  Calendar,
-  CheckCircle2,
-} from 'lucide-react';
-import GlassCard from '../components/ui/GlassCard';
-import Button from '../components/ui/Button';
+import { Users, ShieldCheck, Clock, MapPin, Car } from 'lucide-react';
 import { FLEET_DATA } from '../data/fleetData';
-import { BUSINESS_INFO } from '../data/businessInfo';
 import { createWhatsAppQuickUrl } from '../utils/whatsapp';
 import './Fleet.css';
 
 export default function Fleet() {
-  const [selectedVehicleForEnquiry, setSelectedVehicleForEnquiry] = useState(
-    'Toyota Innova Crysta'
-  );
-
-  const handleCustomWhatsAppEnquiry = (e) => {
-    e.preventDefault();
-    const msg = `Hello Vicky, I am looking to enquire about vehicle availability for: *${selectedVehicleForEnquiry}* with SKB Tour and Travels.\nPlease let me know pricing and dates.`;
-    window.open(createWhatsAppQuickUrl(msg), '_blank', 'noopener,noreferrer');
-  };
-
   return (
     <div className="fleet-page-root">
       {/* 1. Header Banner */}
-      <section className="fleet-hero-banner" aria-label="Fleet Overview">
-        <div className="fleet-hero-bg">
-          <img
-            src="/assets/images/fleet-banner.jpeg"
-            alt="SKB Tour and Travels Fleet Lineup"
-            className="fleet-hero-img"
-          />
-          <div className="fleet-hero-overlay" />
-        </div>
-
-        <div className="container fleet-hero-container">
-          <div className="fleet-hero-content">
-            <span className="section-tag">
-              <Car size={13} />
-              Verified Fleet
-            </span>
-            <h1 className="fleet-hero-title">
-              The Right Ride for <span className="text-gold">Every Road Ahead.</span>
-            </h1>
-            <div className="gold-divider" />
-            <p className="fleet-hero-desc">
-              Whether you are catching an early morning flight at Kempegowda Airport, embarking on an interstate pilgrimage, or planning an executive corporate delegation, our fleet offers dependable, well-maintained vehicles.
+      <section className="fleet-banner-navy" aria-label="Our Fleet Banner">
+        <div className="container fleet-banner-grid">
+          <div className="fleet-banner-left">
+            <h1 className="fleet-main-title">Our Fleet</h1>
+            <h2 className="fleet-main-sub">The Right Ride for Every Road Ahead.</h2>
+            <p className="fleet-main-desc">
+              Comfortable, clean and well-maintained vehicles for all your travel needs.
             </p>
+          </div>
+
+          <div className="fleet-banner-right">
+            <img
+              src="/assets/images/mysore-fleet-banner.png"
+              alt="SKB Fleet Lineup in Front of Palace"
+              className="fleet-palace-banner-img"
+            />
           </div>
         </div>
       </section>
 
-      {/* 2. Honest Verification Notice */}
-      <div className="container">
-        <div className="fleet-verification-banner">
-          <div className="verification-icon-wrap">
-            <ShieldCheck size={22} className="text-gold" />
-          </div>
-          <div className="verification-text-block">
-            <h4 className="verification-title">Authentic Fleet Commitment</h4>
-            <p className="verification-desc">
-              We present actual vehicle photographs and confirmed passenger capacities. Where seating configurations vary (such as 12, 14, or 17 seater Force Travellers), we state <em>"Confirm availability"</em> so you receive exact, honest details prior to booking.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* 3. Vehicle Discovery Grid */}
-      <section className="section-padding fleet-grid-section" aria-label="Vehicle Cards">
+      {/* 2. Vehicle Cards Grid (2 rows of 3 columns) */}
+      <section className="fleet-cards-section" aria-label="Available Vehicles">
         <div className="container">
-          <div className="fleet-full-grid">
-            {FLEET_DATA.map((vehicle) => (
-              <GlassCard key={vehicle.id} className="fleet-detail-card" hoverEffect={true}>
-                {/* Image Section */}
-                <div className="fleet-img-wrap">
-                  <img
-                    src={vehicle.image}
-                    alt={vehicle.name}
-                    className="fleet-card-img"
-                    loading="lazy"
-                  />
-                  <div className="fleet-badge-floating">{vehicle.badge}</div>
-                  <div className="fleet-category-sub">{vehicle.category}</div>
-                </div>
-
-                {/* Details Section */}
-                <div className="fleet-card-content">
-                  <h3 className="fleet-vehicle-name">{vehicle.name}</h3>
-
-                  <div className="fleet-capacity-indicator">
-                    <Users size={16} className="text-gold" />
-                    <span className="fleet-cap-label">Passenger Capacity:</span>
-                    <span
-                      className={`fleet-cap-status ${
-                        vehicle.hasConfirmedCapacity ? 'cap-confirmed' : 'cap-pending'
-                      }`}
-                    >
-                      {vehicle.verifiedCapacity}
-                    </span>
-                  </div>
-
-                  <p className="fleet-vehicle-description">{vehicle.description}</p>
-
-                  {/* Suitable Travel Types */}
-                  <div className="fleet-features-block">
-                    <span className="block-label">Suitable Travel Types:</span>
-                    <div className="travel-types-chips">
-                      {vehicle.suitableFor.map((trip, idx) => (
-                        <span key={idx} className="trip-chip">
-                          {trip}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Highlights */}
-                  <div className="fleet-features-block">
-                    <span className="block-label">Key Highlights:</span>
-                    <ul className="vehicle-highlights-list">
-                      {vehicle.features.map((feat, idx) => (
-                        <li key={idx} className="highlight-item">
-                          <CheckCircle2 size={13} className="text-gold feat-icon" />
-                          <span>{feat}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Card Actions */}
-                  <div className="fleet-card-action-bar">
-                    <Button
-                      to="/booking"
-                      state={{ prefill: { preferredVehicle: vehicle.name } }}
-                      variant="primary"
-                      size="md"
-                      className="btn-fleet-book"
-                    >
-                      <span>Enquire Now</span>
-                      <ArrowRight size={15} />
-                    </Button>
-
+          <div className="fleet-grid-3x2">
+            {FLEET_DATA.map((vehicle) => {
+              if (vehicle.isCustomCard) {
+                return (
+                  <div key={vehicle.id} className="fleet-card-dark-special">
+                    <h3 className="special-card-title">{vehicle.name}</h3>
+                    <p className="special-card-text">{vehicle.description}</p>
                     <a
                       href={createWhatsAppQuickUrl(
-                        `Hello Vicky, I would like to check availability for ${vehicle.name} with SKB Tour and Travels.`
+                        'Hello Vicky, I need a specific vehicle not listed on the website. Please advise availability.'
                       )}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="btn-fleet-wa"
-                      title="Enquire on WhatsApp"
+                      className="btn-enquire-now-pill"
                     >
-                      <MessageSquare size={16} />
-                      <span>WhatsApp</span>
+                      Enquire Now
                     </a>
                   </div>
+                );
+              }
+
+              return (
+                <div key={vehicle.id} className="vehicle-card-white">
+                  <div className="vehicle-badge-gold">{vehicle.badge}</div>
+
+                  <div className="vehicle-card-img-wrap">
+                    <img
+                      src={vehicle.image}
+                      alt={vehicle.name}
+                      className="vehicle-photo"
+                    />
+                  </div>
+
+                  <div className="vehicle-card-text">
+                    <h3 className="vehicle-name-dark">{vehicle.name}</h3>
+
+                    <div className="vehicle-seater-row">
+                      <Users size={14} className="text-gold" />
+                      <span>{vehicle.capacity}</span>
+                    </div>
+
+                    <p className="vehicle-tagline-text">{vehicle.description}</p>
+
+                    <Link
+                      to="/booking"
+                      state={{ prefill: { preferredVehicle: vehicle.name } }}
+                      className="btn-enquire-now-pill"
+                    >
+                      Enquire Now
+                    </Link>
+                  </div>
                 </div>
-              </GlassCard>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* 4. "Need a Specific Vehicle?" Enquiry Section */}
-      <section className="section-padding custom-vehicle-section" aria-label="Need a Specific Vehicle">
+      {/* 3. Bottom Feature Badges Strip (Dark Navy) */}
+      <section className="fleet-bottom-strip-navy" aria-label="Fleet Service Commitments">
         <div className="container">
-          <div className="custom-vehicle-card">
-            <div className="custom-vehicle-grid">
-              <div className="custom-left-info">
-                <span className="section-tag">
-                  <Sparkles size={13} />
-                  Custom Fleet Logistics
-                </span>
-                <h2 className="custom-title">
-                  Need a Specific <span className="text-gold">Vehicle or Convoy?</span>
-                </h2>
-                <div className="gold-divider" />
-                <p className="custom-desc">
-                  Planning a multi-car wedding convoy, an executive corporate delegation, or requiring an exact luxury specification? Vicky coordinates specialized vehicles on request across Karnataka and interstate circuits.
-                </p>
-
-                <div className="custom-perks-list">
-                  <div className="custom-perk-item">
-                    <CheckCircle2 size={16} className="text-gold" />
-                    <span>Direct coordination with owner Vicky</span>
-                  </div>
-                  <div className="custom-perk-item">
-                    <CheckCircle2 size={16} className="text-gold" />
-                    <span>Written fare confirmation prior to booking</span>
-                  </div>
-                  <div className="custom-perk-item">
-                    <CheckCircle2 size={16} className="text-gold" />
-                    <span>Airport area dispatch & PAN India coverage</span>
-                  </div>
-                </div>
+          <div className="fleet-commitments-row">
+            <div className="commitment-item">
+              <div className="commitment-icon-circle">
+                <ShieldCheck size={20} className="text-gold" />
               </div>
+              <span>Well Maintained Vehicles</span>
+            </div>
 
-              <div className="custom-right-form">
-                <div className="custom-form-glass">
-                  <h4 className="form-box-title">Instant Vehicle Availability Check</h4>
-                  <p className="form-box-sub">Select your desired model and connect directly via WhatsApp.</p>
-
-                  <form onSubmit={handleCustomWhatsAppEnquiry} className="custom-quick-form">
-                    <div className="form-group">
-                      <label htmlFor="custom-vehicle-select" className="custom-label">
-                        Vehicle Model
-                      </label>
-                      <select
-                        id="custom-vehicle-select"
-                        value={selectedVehicleForEnquiry}
-                        onChange={(e) => setSelectedVehicleForEnquiry(e.target.value)}
-                        className="custom-select"
-                      >
-                        {FLEET_DATA.map((v) => (
-                          <option key={v.id} value={v.name}>
-                            {v.name}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-
-                    <Button
-                      type="submit"
-                      variant="whatsapp"
-                      size="lg"
-                      icon={<MessageSquare size={18} />}
-                      className="btn-custom-wa"
-                    >
-                      Check Availability on WhatsApp
-                    </Button>
-
-                    <div className="custom-form-call-note">
-                      <span>Prefer to speak directly?</span>
-                      <a href={`tel:${BUSINESS_INFO.primaryPhone}`} className="text-gold font-bold">
-                        Call {BUSINESS_INFO.primaryPhoneDisplay}
-                      </a>
-                    </div>
-                  </form>
-                </div>
+            <div className="commitment-item">
+              <div className="commitment-icon-circle">
+                <Car size={20} className="text-gold" />
               </div>
+              <span>Experienced Drivers</span>
+            </div>
+
+            <div className="commitment-item">
+              <div className="commitment-icon-circle">
+                <MapPin size={20} className="text-gold" />
+              </div>
+              <span>All India Travel</span>
+            </div>
+
+            <div className="commitment-item">
+              <div className="commitment-icon-circle">
+                <Clock size={20} className="text-gold" />
+              </div>
+              <span>24/7 Support</span>
             </div>
           </div>
         </div>

@@ -1,439 +1,327 @@
 /* ==========================================================================
-   PAGE 3: PACKAGES AND PRICING STYLES
+   PAGE 3: PACKAGES AND PRICING STYLES (MATCHING TARGET DESIGN)
    ========================================================================== */
 
 .packages-page-root {
+  background-color: #F7F9FC;
+  color: #071426;
   overflow-x: hidden;
 }
 
 /* 1. Header Banner */
-.packages-hero-banner {
-  background: linear-gradient(180deg, #051121 0%, var(--color-navy) 100%);
-  padding: 5rem 0 3.5rem;
+.packages-banner-navy {
+  background: linear-gradient(135deg, #071426 0%, #0d223f 70%, #071426 100%);
+  color: #F7F9FC;
+  padding: 3.5rem 0 2.5rem;
+  border-bottom: 2px solid rgba(231, 184, 77, 0.25);
+}
+
+.packages-banner-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.packages-main-title {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.25rem;
+}
+
+.packages-main-sub {
+  font-family: 'Times New Roman', Times, serif, var(--font-heading);
+  font-size: clamp(2rem, 3.8vw, 3rem);
+  font-weight: 800;
+  line-height: 1.15;
+  color: #F7F9FC;
+  margin-bottom: 0.75rem;
+}
+
+.packages-main-desc {
+  font-size: 0.95rem;
+  color: #b8c7db;
+}
+
+.packages-banner-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.packages-banner-fleet-img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  object-fit: cover;
+}
+
+/* 2. Four Pricing Cards Grid */
+.pricing-cards-section {
+  padding: 3.5rem 0 2rem;
+  background: #F7F9FC;
+}
+
+.pricing-cards-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.pricing-card-box {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.pricing-card-box:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.featured-pricing-box {
+  border-color: var(--color-gold);
+  box-shadow: 0 8px 25px rgba(231, 184, 77, 0.2);
+}
+
+.popular-ribbon-gold {
+  position: absolute;
+  top: 0;
+  right: 1.25rem;
+  background: var(--color-gold);
+  color: #071426;
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 0.2rem 0.65rem;
+  border-radius: 0 0 6px 6px;
+  z-index: 5;
+}
+
+.pricing-card-header {
+  background: #071426;
+  color: #F7F9FC;
+  padding: 1.15rem 1rem;
   text-align: center;
 }
 
-.packages-hero-content {
-  max-width: 760px;
-  margin: 0 auto;
-}
-
-.packages-hero-title {
-  font-size: clamp(2.2rem, 5vw, 3.4rem);
+.pricing-card-header h3 {
+  font-size: 1.15rem;
   font-weight: 800;
-  color: var(--color-pearl);
-  margin-top: 0.75rem;
-  margin-bottom: 0.5rem;
+  color: #F7F9FC;
+  line-height: 1.1;
 }
 
-.packages-hero-desc {
-  font-size: 1.05rem;
-  line-height: 1.65;
-  color: var(--color-pearl-muted);
+.pricing-card-header span {
+  font-size: 0.78rem;
+  color: #94a3b8;
 }
 
-/* 2. Notice Callout */
-.pricing-notice-callout {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  background: rgba(231, 184, 77, 0.08);
-  border: 1px solid var(--color-gold-border);
-  border-radius: var(--radius-md);
-  padding: 1rem 1.5rem;
-  margin-top: -1.5rem;
-  position: relative;
-  z-index: 10;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-}
-
-.callout-icon {
-  flex-shrink: 0;
-}
-
-.callout-text {
-  font-size: 0.88rem;
-  line-height: 1.5;
-  color: var(--color-pearl);
-}
-
-.callout-text strong {
-  color: var(--color-gold);
-}
-
-/* 3. Package Cards Grid */
-.packages-list-section {
-  background: var(--color-navy);
-}
-
-.packages-card-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2rem;
-}
-
-.package-detail-card {
-  padding: 2.5rem 2.25rem;
+.pricing-card-body {
+  padding: 1.5rem 1.25rem;
   display: flex;
   flex-direction: column;
-  position: relative;
-  height: 100%;
+  align-items: center;
+  text-align: center;
+  flex-grow: 1;
 }
 
-.popular-glow-card {
-  border-color: var(--color-gold);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65), 0 0 30px rgba(231, 184, 77, 0.2);
-}
-
-.popular-badge-pill {
-  position: absolute;
-  top: 1.25rem;
-  right: 1.5rem;
-  background: linear-gradient(135deg, #E7B84D 0%, #cfa038 100%);
-  color: #040c17;
-  font-size: 0.74rem;
+.price-big-text {
+  font-size: 2.1rem;
   font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  padding: 0.3rem 0.85rem;
-  border-radius: var(--radius-full);
-}
-
-.card-top-header {
-  margin-bottom: 1.25rem;
-}
-
-.pkg-category-tag {
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--color-gold);
-  font-weight: 700;
-  display: block;
-  margin-bottom: 0.35rem;
-}
-
-.pkg-title-text {
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: var(--color-pearl);
-  margin-bottom: 1rem;
-}
-
-.price-display-wrapper {
-  margin-bottom: 1.25rem;
-}
-
-.price-main-number {
-  font-size: 2.6rem;
-  font-weight: 800;
-  color: var(--color-gold);
-  line-height: 1.1;
-  display: block;
+  color: #071426;
+  margin-bottom: 0.5rem;
   letter-spacing: -0.02em;
 }
 
-.price-subtitle-note {
-  font-size: 0.82rem;
-  color: var(--color-pearl-muted);
-  margin-top: 0.25rem;
-  display: block;
+.price-pill-tag {
+  background: #fdfaf0;
+  border: 1px solid rgba(231, 184, 77, 0.4);
+  color: #b88619;
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-full);
+  margin-bottom: 1.25rem;
 }
 
-.pkg-metrics-bar {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  font-size: 0.82rem;
-  color: var(--color-pearl);
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  padding: 0.45rem 0.85rem;
-  border-radius: var(--radius-sm);
-}
-
-.metric-item {
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-}
-
-.metric-sep {
-  color: rgba(255, 255, 255, 0.3);
-}
-
-.gold-subdivider {
-  height: 1px;
-  background: rgba(231, 184, 77, 0.2);
-  margin-bottom: 1.5rem;
-}
-
-.pkg-details-body {
+.pricing-points-list {
+  list-style: none;
   display: flex;
   flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: 1.25rem;
+  width: 100%;
+  text-align: left;
   flex-grow: 1;
-  margin-bottom: 2rem;
 }
 
-.pkg-section-label {
-  font-size: 0.78rem;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  font-weight: 700;
-  color: var(--color-pearl);
-  margin-bottom: 0.65rem;
+.pricing-points-list li {
+  font-size: 0.82rem;
+  color: #475569;
+  line-height: 1.4;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.4rem;
+}
+
+.pricing-points-list .dot {
+  color: var(--color-gold);
+  font-size: 1.1rem;
+  line-height: 0.9;
+}
+
+.pricing-conditions-small {
+  font-size: 0.72rem;
+  color: #94a3b8;
+  margin-bottom: 1rem;
   display: block;
 }
 
-.exclusions-label {
-  color: #fbbf24;
-  margin-top: 1.25rem;
+.btn-book-now-gold {
+  display: block;
+  width: 100%;
+  text-align: center;
+  background: linear-gradient(135deg, #E7B84D 0%, #cfa038 100%);
+  color: #071426;
+  font-size: 0.88rem;
+  font-weight: 700;
+  padding: 0.65rem;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  margin-top: auto;
 }
 
-.pkg-bullet-list,
-.pkg-exclusions-list {
+.btn-book-now-gold:hover {
+  background: linear-gradient(135deg, #f1c765 0%, #E7B84D 100%);
+}
+
+/* 3. Included Strip (White) */
+.included-strip-section {
+  padding: 2.25rem 0;
+  background: #ffffff;
+  border-top: 1px solid #e2e8f0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.included-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #071426;
+  margin-bottom: 1.25rem;
+}
+
+.included-items-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.included-item {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #071426;
+}
+
+.inc-icon-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #fdfaf0;
+  border: 1px solid rgba(231, 184, 77, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* 4. Pricing Conditions Section (2 columns) */
+.pricing-conditions-section {
+  padding: 3rem 0 4rem;
+  background: #F7F9FC;
+}
+
+.conditions-split-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.conditions-heading {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #071426;
+  margin-bottom: 1.25rem;
+}
+
+.conditions-bullet-points {
   list-style: none;
   display: flex;
   flex-direction: column;
   gap: 0.65rem;
 }
 
-.pkg-bullet-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.65rem;
-  font-size: 0.88rem;
-  color: var(--color-pearl);
+.conditions-bullet-points li {
+  font-size: 0.86rem;
+  color: #475569;
   line-height: 1.5;
-}
-
-.bullet-icon {
-  margin-top: 0.2rem;
-  flex-shrink: 0;
-}
-
-.pkg-exclusion-item {
   display: flex;
   align-items: flex-start;
-  gap: 0.65rem;
-  font-size: 0.82rem;
-  color: var(--color-pearl-muted);
-  line-height: 1.4;
+  gap: 0.45rem;
 }
 
-.exc-icon {
-  margin-top: 0.15rem;
-  flex-shrink: 0;
-  opacity: 0.8;
+.bullet-dot {
+  color: var(--color-gold);
+  font-size: 1.2rem;
+  line-height: 0.9;
 }
 
-.pkg-card-cta-row {
-  margin-top: auto;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.btn-select-pkg {
-  flex: 1;
-}
-
-.btn-pkg-wa-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: rgba(37, 211, 102, 0.15);
-  border: 1px solid rgba(37, 211, 102, 0.4);
-  color: #25D366;
+.conditions-right-img {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
-  transition: all var(--transition-fast);
 }
 
-.btn-pkg-wa-icon:hover {
-  background: rgba(37, 211, 102, 0.3);
-  transform: scale(1.08);
-}
-
-/* 4. Conditions Section */
-.conditions-section {
-  background: #040c17;
-}
-
-.conditions-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
-  margin-bottom: 3rem;
-}
-
-.condition-card {
-  padding: 2rem 1.5rem;
-  display: flex;
-  flex-direction: column;
-}
-
-.condition-num-wrap {
-  margin-bottom: 0.85rem;
-}
-
-.condition-num {
-  font-family: var(--font-heading);
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: var(--color-gold);
-  opacity: 0.6;
-}
-
-.condition-title {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: var(--color-pearl);
-  margin-bottom: 0.65rem;
-}
-
-.condition-desc {
-  font-size: 0.85rem;
-  line-height: 1.6;
-  color: var(--color-pearl-muted);
-}
-
-/* Outstation Formula Card */
-.outstation-formula-card {
-  background: rgba(13, 34, 63, 0.5);
-  border: 1px solid var(--color-gold-border);
-  border-radius: var(--radius-lg);
-  padding: 2.25rem;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
-}
-
-.formula-header {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 1rem;
-}
-
-.formula-header h3 {
-  font-size: 1.25rem;
-  color: var(--color-pearl);
-}
-
-.formula-desc {
-  font-size: 0.95rem;
-  line-height: 1.7;
-  color: var(--color-pearl-muted);
-  margin-bottom: 1.25rem;
-}
-
-.formula-desc strong {
-  color: var(--color-gold);
-}
-
-.formula-example {
-  background: rgba(7, 20, 38, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: var(--radius-sm);
-  padding: 0.85rem 1.25rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-}
-
-.example-label {
-  font-size: 0.76rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  color: var(--color-gold);
-}
-
-.example-text {
-  font-size: 0.88rem;
-  color: var(--color-pearl);
-}
-
-/* 5. Custom Quote Box */
-.custom-pricing-cta {
-  background: var(--color-navy);
-}
-
-.custom-quote-box {
-  background: linear-gradient(135deg, rgba(13, 34, 63, 0.8), rgba(7, 20, 38, 0.95));
-  border: 1px solid var(--color-gold-border);
-  border-radius: var(--radius-xl);
-  padding: 3.5rem 2.5rem;
-  text-align: center;
-  max-width: 820px;
-  margin: 0 auto;
-}
-
-.custom-quote-title {
-  font-size: clamp(1.6rem, 3vw, 2.2rem);
-  font-weight: 800;
-  color: var(--color-pearl);
-  margin-bottom: 0.85rem;
-}
-
-.custom-quote-desc {
-  font-size: 1rem;
-  line-height: 1.6;
-  color: var(--color-pearl-muted);
-  margin-bottom: 2rem;
-  max-width: 640px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.custom-quote-buttons {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1.25rem;
-  flex-wrap: wrap;
-}
-
-.btn-custom-quote-wa {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: rgba(37, 211, 102, 0.15);
-  border: 1px solid rgba(37, 211, 102, 0.4);
-  color: #25D366;
-  padding: 0.85rem 1.6rem;
-  border-radius: var(--radius-full);
-  font-weight: 700;
-  font-size: 0.95rem;
-  transition: all var(--transition-fast);
-}
-
-.btn-custom-quote-wa:hover {
-  background: rgba(37, 211, 102, 0.25);
-  transform: translateY(-2px);
+.conditions-car-photo {
+  width: 100%;
+  max-width: 380px;
+  height: auto;
+  object-fit: contain;
 }
 
 /* Responsive */
 @media (max-width: 1024px) {
-  .packages-card-grid {
+  .packages-banner-grid {
     grid-template-columns: 1fr;
   }
-
-  .conditions-grid {
+  .pricing-cards-grid-4 {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .conditions-split-grid {
+    grid-template-columns: 1fr;
   }
 }
 
-@media (max-width: 640px) {
-  .conditions-grid {
+@media (max-width: 600px) {
+  .pricing-cards-grid-4 {
     grid-template-columns: 1fr;
-  }
-
-  .package-detail-card {
-    padding: 1.75rem 1.25rem;
-  }
-
-  .custom-quote-box {
-    padding: 2.25rem 1.25rem;
   }
 }

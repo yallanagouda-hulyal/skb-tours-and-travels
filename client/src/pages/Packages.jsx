@@ -1,216 +1,201 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
-  Sparkles,
-  CheckCircle2,
-  AlertTriangle,
-  Info,
+  Car,
   Clock,
-  Compass,
-  Plane,
-  ArrowRight,
-  MessageSquare,
   ShieldCheck,
-  HelpCircle,
+  CheckCircle,
+  Sparkles,
 } from 'lucide-react';
-import GlassCard from '../components/ui/GlassCard';
-import Button from '../components/ui/Button';
-import { PACKAGES_DATA, PRICING_CONDITIONS } from '../data/packagesData';
-import { BUSINESS_INFO } from '../data/businessInfo';
-import { createWhatsAppQuickUrl } from '../utils/whatsapp';
 import './Packages.css';
 
 export default function Packages() {
   return (
     <div className="packages-page-root">
       {/* 1. Header Banner */}
-      <section className="packages-hero-banner" aria-label="Packages Overview">
-        <div className="container">
-          <div className="packages-hero-content">
-            <span className="section-tag">
-              <Sparkles size={13} />
-              Transparent Fares
-            </span>
-            <h1 className="packages-hero-title">
-              Clear, Indicative <span className="text-gold">Packages & Rates</span>
-            </h1>
-            <div className="gold-divider gold-divider-center" />
-            <p className="packages-hero-desc">
-              We believe in upfront, transparent pricing without hidden surprises. Review our indicative city rental packages, outstation mileage, and airport transfer formulas below.
-            </p>
+      <section className="packages-banner-navy" aria-label="Packages and Pricing Banner">
+        <div className="container packages-banner-grid">
+          <div className="packages-banner-left">
+            <h1 className="packages-main-title">Packages & Pricing</h1>
+            <h2 className="packages-main-sub">Flexible Packages for Every Journey</h2>
+            <p className="packages-main-desc">Choose the best travel plan as per your need.</p>
+          </div>
+
+          <div className="packages-banner-right">
+            <img
+              src="/assets/images/airport-hero-banner.png"
+              alt="SKB Travel Packages Fleet"
+              className="packages-banner-fleet-img"
+            />
           </div>
         </div>
       </section>
 
-      {/* 2. Owner Confirmation Notice */}
-      <div className="container">
-        <div className="pricing-notice-callout">
-          <Info size={22} className="callout-icon text-gold" />
-          <div className="callout-text">
-            <strong>Owner Confirmation Notice:</strong> All fares displayed on this website are baseline indicative rates. The final binding fare is confirmed in writing by Vicky based on vehicle choice, exact pickup/drop route, dates, and traffic conditions.
-          </div>
-        </div>
-      </div>
-
-      {/* 3. Package Cards Grid */}
-      <section className="section-padding packages-list-section" aria-label="Available Packages">
+      {/* 2. Four Pricing Cards Row */}
+      <section className="pricing-cards-section" aria-label="Pricing Packages">
         <div className="container">
-          <div className="packages-card-grid">
-            {PACKAGES_DATA.map((pkg) => (
-              <GlassCard
-                key={pkg.id}
-                className={`package-detail-card ${pkg.isPopular ? 'popular-glow-card' : ''}`}
-                hoverEffect={true}
-              >
-                {pkg.isPopular && <div className="popular-badge-pill">Most Popular</div>}
+          <div className="pricing-cards-grid-4">
+            {/* Card 1: Local 4 Hours */}
+            <div className="pricing-card-box">
+              <div className="pricing-card-header">
+                <h3>Local 4</h3>
+                <span>Hours / 40 KM</span>
+              </div>
+              <div className="pricing-card-body">
+                <div className="price-big-text">₹1,200</div>
+                <div className="price-pill-tag">Best for Short Trips</div>
 
-                <div className="card-top-header">
-                  <span className="pkg-category-tag">{pkg.category}</span>
-                  <h3 className="pkg-title-text">{pkg.name}</h3>
+                <ul className="pricing-points-list">
+                  <li><span className="dot">•</span> 4 Hours / 40 KM</li>
+                  <li><span className="dot">•</span> Extra Hour: ₹150</li>
+                  <li><span className="dot">•</span> Extra KM: ₹13</li>
+                </ul>
 
-                  <div className="price-display-wrapper">
-                    <span className="price-main-number">{pkg.priceDisplay}</span>
-                    <span className="price-subtitle-note">{pkg.priceSubtext}</span>
-                  </div>
+                <span className="pricing-conditions-small">Conditions apply</span>
 
-                  <div className="pkg-metrics-bar">
-                    <span className="metric-item">
-                      <Clock size={14} className="text-gold" />
-                      <span>{pkg.duration}</span>
-                    </span>
-                    <span className="metric-sep">•</span>
-                    <span className="metric-item">
-                      <Compass size={14} className="text-gold" />
-                      <span>{pkg.distance}</span>
-                    </span>
-                  </div>
-                </div>
-
-                <div className="gold-subdivider" />
-
-                <div className="pkg-details-body">
-                  <span className="pkg-section-label">Included Features:</span>
-                  <ul className="pkg-bullet-list">
-                    {pkg.features.map((feat, idx) => (
-                      <li key={idx} className="pkg-bullet-item">
-                        <CheckCircle2 size={15} className="text-gold bullet-icon" />
-                        <span>{feat}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <span className="pkg-section-label exclusions-label">Important Exclusions:</span>
-                  <ul className="pkg-exclusions-list">
-                    {pkg.exclusions.map((exc, idx) => (
-                      <li key={idx} className="pkg-exclusion-item">
-                        <AlertTriangle size={14} className="text-gold exc-icon" />
-                        <span>{exc}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div className="pkg-card-cta-row">
-                  <Button
-                    to="/booking"
-                    state={{ prefill: { tripType: pkg.tripTypeKey } }}
-                    variant={pkg.isPopular ? 'primary' : 'secondary'}
-                    size="md"
-                    className="btn-select-pkg"
-                  >
-                    <span>Book This Package</span>
-                    <ArrowRight size={15} />
-                  </Button>
-
-                  <a
-                    href={createWhatsAppQuickUrl(
-                      `Hello Vicky, I would like to enquire about the ${pkg.name} (${pkg.priceDisplay}) with SKB Tour and Travels.`
-                    )}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-pkg-wa-icon"
-                    title="Enquire on WhatsApp"
-                  >
-                    <MessageSquare size={17} />
-                  </a>
-                </div>
-              </GlassCard>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 4. Detailed Pricing Conditions Section */}
-      <section className="section-padding conditions-section" aria-label="Transparent Pricing Conditions">
-        <div className="container">
-          <div className="section-header">
-            <span className="section-tag">
-              <ShieldCheck size={13} />
-              Fair & Open Terms
-            </span>
-            <h2 className="section-title">
-              Pricing <span className="text-gold">Conditions & Terms</span>
-            </h2>
-            <div className="gold-divider gold-divider-center" />
-            <p className="section-description">
-              We maintain absolute transparency regarding additional highway or parking expenses. Please review these standard travel principles before confirming your ride.
-            </p>
-          </div>
-
-          <div className="conditions-grid">
-            {PRICING_CONDITIONS.map((cond, idx) => (
-              <GlassCard key={idx} className="condition-card">
-                <div className="condition-num-wrap">
-                  <span className="condition-num">{String(idx + 1).padStart(2, '0')}</span>
-                </div>
-                <h4 className="condition-title">{cond.title}</h4>
-                <p className="condition-desc">{cond.description}</p>
-              </GlassCard>
-            ))}
-          </div>
-
-          {/* Outstation Formula Highlight Box */}
-          <div className="outstation-formula-card">
-            <div className="formula-header">
-              <Compass size={24} className="text-gold" />
-              <h3>Outstation Billing Guidelines (₹13 / KM Indicative)</h3>
+                <Link
+                  to="/booking"
+                  state={{ prefill: { tripType: 'local_4h_40km' } }}
+                  className="btn-book-now-gold"
+                >
+                  Book Now
+                </Link>
+              </div>
             </div>
-            <p className="formula-desc">
-              For all outstation itineraries, distance is calculated from our airport operational hub / dispatch garage back to the origin garage. A calendar day minimum average of <strong>300 kilometres per day</strong> applies. For overnight stays, driver night allowance of <strong>₹400</strong> applies subject to confirmation.
-            </p>
-            <div className="formula-example">
-              <span className="example-label">Calculation Example:</span>
-              <span className="example-text">
-                A 3-day round trip will be billed for a minimum of 900 km (3 × 300 km) at the agreed per-km rate, plus applicable driver allowances and actual toll tickets.
-              </span>
+
+            {/* Card 2: Local 8 Hours (Most Popular) */}
+            <div className="pricing-card-box featured-pricing-box">
+              <div className="popular-ribbon-gold">Most Popular</div>
+              <div className="pricing-card-header">
+                <h3>Local 8</h3>
+                <span>Hours / 80 KM</span>
+              </div>
+              <div className="pricing-card-body">
+                <div className="price-big-text">₹1,900</div>
+                <div className="price-pill-tag">Best for Day Trips</div>
+
+                <ul className="pricing-points-list">
+                  <li><span className="dot">•</span> 8 Hours / 80 KM</li>
+                  <li><span className="dot">•</span> Extra Hour: ₹150</li>
+                  <li><span className="dot">•</span> Extra KM: ₹13</li>
+                </ul>
+
+                <span className="pricing-conditions-small">Conditions apply</span>
+
+                <Link
+                  to="/booking"
+                  state={{ prefill: { tripType: 'local_8h_80km' } }}
+                  className="btn-book-now-gold"
+                >
+                  Book Now
+                </Link>
+              </div>
+            </div>
+
+            {/* Card 3: Outstation Trips */}
+            <div className="pricing-card-box">
+              <div className="pricing-card-header">
+                <h3>Outstation</h3>
+                <span>Trips</span>
+              </div>
+              <div className="pricing-card-body">
+                <div className="price-big-text">₹13 / KM</div>
+                <div className="price-pill-tag">Best for Long Travel</div>
+
+                <ul className="pricing-points-list">
+                  <li><span className="dot">•</span> Minimum 300 KM per day (average)</li>
+                  <li><span className="dot">•</span> One-way & Round Trip</li>
+                  <li><span className="dot">•</span> Driver Charges (Night): ₹400 (Separate)</li>
+                  <li><span className="dot">•</span> All India Travel Available</li>
+                </ul>
+
+                <Link
+                  to="/booking"
+                  state={{ prefill: { tripType: 'outstation_round' } }}
+                  className="btn-book-now-gold"
+                >
+                  Book Now
+                </Link>
+              </div>
+            </div>
+
+            {/* Card 4: Airport Transfer */}
+            <div className="pricing-card-box">
+              <div className="pricing-card-header">
+                <h3>Airport</h3>
+                <span>Transfer</span>
+              </div>
+              <div className="pricing-card-body">
+                <div className="price-big-text">₹21 / KM</div>
+                <div className="price-pill-tag">Airport Pickup & Drop</div>
+
+                <ul className="pricing-points-list">
+                  <li><span className="dot">•</span> Airport pickup & drop</li>
+                  <li><span className="dot">•</span> KM wise calculation</li>
+                  <li><span className="dot">•</span> Toll separate (Not included)</li>
+                  <li><span className="dot">•</span> Comfortable & reliable</li>
+                </ul>
+
+                <Link
+                  to="/booking"
+                  state={{ prefill: { tripType: 'airport_transfer' } }}
+                  className="btn-book-now-gold"
+                >
+                  Book Now
+                </Link>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 5. Custom Route CTA */}
-      <section className="section-padding custom-pricing-cta" aria-label="Custom Quote CTA">
+      {/* 3. Included in Our Packages Strip (White Strip) */}
+      <section className="included-strip-section" aria-label="Included In Our Packages">
         <div className="container">
-          <div className="custom-quote-box">
-            <h3 className="custom-quote-title">Have a Complex or Multi-City Route?</h3>
-            <p className="custom-quote-desc">
-              Whether you are planning a corporate circuit across Bengaluru tech parks or an extended PAN India highway expedition, connect directly with Vicky for an itemized estimate.
-            </p>
-            <div className="custom-quote-buttons">
-              <Button to="/booking" variant="primary" size="lg" icon={<ArrowRight size={18} />}>
-                Submit Booking Enquiry
-              </Button>
-              <a
-                href={createWhatsAppQuickUrl(
-                  'Hello Vicky, I need a custom quote for a multi-city travel itinerary with SKB Tour and Travels.'
-                )}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-custom-quote-wa"
-              >
-                <MessageSquare size={18} />
-                <span>Discuss on WhatsApp</span>
-              </a>
+          <h3 className="included-title">Included in Our Packages</h3>
+          <div className="included-items-row">
+            <div className="included-item">
+              <div className="inc-icon-circle"><Car size={18} className="text-gold" /></div>
+              <span>AC & Non-AC Vehicles</span>
+            </div>
+            <div className="included-item">
+              <div className="inc-icon-circle"><ShieldCheck size={18} className="text-gold" /></div>
+              <span>Professional Drivers</span>
+            </div>
+            <div className="included-item">
+              <div className="inc-icon-circle"><Clock size={18} className="text-gold" /></div>
+              <span>24/7 Support</span>
+            </div>
+            <div className="included-item">
+              <div className="inc-icon-circle"><Sparkles size={18} className="text-gold" /></div>
+              <span>Clean & Safe Travel</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. Pricing Conditions (2-column layout with car photo on right) */}
+      <section className="pricing-conditions-section" aria-label="Pricing Conditions">
+        <div className="container">
+          <div className="conditions-split-grid">
+            <div className="conditions-left-list">
+              <h3 className="conditions-heading">Pricing Conditions</h3>
+              <ul className="conditions-bullet-points">
+                <li><span className="bullet-dot">•</span> Toll charges are separate and not included</li>
+                <li><span className="bullet-dot">•</span> Parking and other charges (if any) are extra</li>
+                <li><span className="bullet-dot">•</span> Final fare depends on route, vehicle, date and travel conditions</li>
+                <li><span className="bullet-dot">•</span> Minimum 300 KM per day average for outstation trips</li>
+                <li><span className="bullet-dot">•</span> Driver charges for night travel: ₹400 (separate)</li>
+                <li><span className="bullet-dot">•</span> Please confirm the final fare and availability before the journey</li>
+              </ul>
+            </div>
+
+            <div className="conditions-right-img">
+              <img
+                src="/assets/images/card-sedan.png"
+                alt="SKB Travels Car"
+                className="conditions-car-photo"
+              />
             </div>
           </div>
         </div>

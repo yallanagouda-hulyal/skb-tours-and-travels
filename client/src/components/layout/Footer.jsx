@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Phone, Mail, MapPin, Clock, ArrowRight, ShieldCheck, Heart } from 'lucide-react';
+import { Phone, Mail, MapPin } from 'lucide-react';
 import { BUSINESS_INFO } from '../../data/businessInfo';
 import './Footer.css';
 
@@ -8,174 +8,98 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="footer-root">
-      {/* Upper Pre-Footer Accent */}
-      <div className="footer-top-accent" />
-
+    <footer className="footer-root-navy">
       <div className="container footer-container">
-        <div className="footer-grid">
-          {/* Column 1: Brand Info */}
+        <div className="footer-grid-4">
+          {/* Col 1: Brand Info */}
           <div className="footer-col brand-col">
             <div className="footer-brand-header">
-              <div className="footer-logo-frame">
+              <div className="footer-logo-box">
                 <img
                   src="/assets/images/skb-logo.jpeg"
                   alt="SKB Tour and Travels"
                   className="footer-logo-img"
-                  onError={(e) => {
-                    e.target.style.display = 'none';
-                  }}
                 />
               </div>
-              <div className="footer-brand-text">
-                <span className="footer-company-name">{BUSINESS_INFO.name}</span>
-                <span className="footer-tagline">{BUSINESS_INFO.tagline}</span>
+              <div className="footer-brand-title">
+                <span className="footer-brand-name">{BUSINESS_INFO.name}</span>
+                <span className="footer-brand-tag">{BUSINESS_INFO.tagline}</span>
               </div>
             </div>
-
-            <p className="footer-about-text">
+            <p className="footer-brand-desc">
               Dedicated travel and transport services specializing in punctual airport pickup & drops, curated outstation journeys, and spacious group travel across Bengaluru and PAN India.
             </p>
+          </div>
 
-            <div className="footer-owner-badge">
-              <span className="badge-label">Proprietor:</span>
-              <span className="badge-name">{BUSINESS_INFO.owner}</span>
-              <span className="badge-pipe">•</span>
-              <span className="badge-reg">{BUSINESS_INFO.profileName}</span>
+          {/* Col 2: Quick Links */}
+          <div className="footer-col">
+            <h4 className="footer-title">Quick Links</h4>
+            <div className="footer-gold-line" />
+            <ul className="footer-links-clean">
+              <li><Link to="/">Home</Link></li>
+              <li><Link to="/fleet">Our Fleet</Link></li>
+              <li><Link to="/packages">Packages</Link></li>
+              <li><Link to="/about">About Us</Link></li>
+              <li><Link to="/contact">Contact</Link></li>
+            </ul>
+          </div>
+
+          {/* Col 3: Our Services */}
+          <div className="footer-col">
+            <h4 className="footer-title">Our Services</h4>
+            <div className="footer-gold-line" />
+            <ul className="footer-links-clean">
+              <li><Link to="/booking" state={{ prefill: { tripType: 'airport_transfer' } }}>Airport Transfers</Link></li>
+              <li><Link to="/packages">Local Trips</Link></li>
+              <li><Link to="/packages">Outstation Travel</Link></li>
+              <li><Link to="/packages">One-way Drops</Link></li>
+              <li><Link to="/fleet">Group Travel</Link></li>
+            </ul>
+          </div>
+
+          {/* Col 4: Contact Us */}
+          <div className="footer-col">
+            <h4 className="footer-title">Contact Us</h4>
+            <div className="footer-gold-line" />
+            <div className="footer-contact-list">
+              <div className="footer-c-row">
+                <Phone size={14} className="text-gold" />
+                <a href={`tel:${BUSINESS_INFO.primaryPhone}`}>{BUSINESS_INFO.primaryPhone}</a>
+              </div>
+              <div className="footer-c-row">
+                <Phone size={14} className="text-gold" />
+                <a href={`tel:${BUSINESS_INFO.alternatePhone}`}>{BUSINESS_INFO.alternatePhone}</a>
+              </div>
+              <div className="footer-c-row">
+                <Mail size={14} className="text-gold" />
+                <a href={`mailto:${BUSINESS_INFO.email}`}>{BUSINESS_INFO.email}</a>
+              </div>
+              <div className="footer-c-row">
+                <MapPin size={14} className="text-gold" />
+                <span>{BUSINESS_INFO.location.fullDisplay}</span>
+              </div>
             </div>
-          </div>
 
-          {/* Column 2: Quick Links */}
-          <div className="footer-col">
-            <h4 className="footer-col-title">Navigation</h4>
-            <div className="footer-title-divider" />
-            <ul className="footer-links-list">
-              <li>
-                <Link to="/" className="footer-link">
-                  <ArrowRight size={14} className="link-arrow" />
-                  <span>Home</span>
-                </Link>
-              </li>
-              <li>
-                <Link to="/fleet" className="footer-link">
-                  <ArrowRight size={14} className="link-arrow" />
-                  <span>Our Fleet & Vehicles</span>
-                </Link>
-              </li>
-              <li>
-                <Link to="/packages" className="footer-link">
-                  <ArrowRight size={14} className="link-arrow" />
-                  <span>Packages & Pricing</span>
-                </Link>
-              </li>
-              <li>
-                <Link to="/booking" className="footer-link">
-                  <ArrowRight size={14} className="link-arrow" />
-                  <span>Book an Enquiry</span>
-                </Link>
-              </li>
-              <li>
-                <Link to="/about" className="footer-link">
-                  <ArrowRight size={14} className="link-arrow" />
-                  <span>About SKB Travels</span>
-                </Link>
-              </li>
-              <li>
-                <Link to="/contact" className="footer-link">
-                  <ArrowRight size={14} className="link-arrow" />
-                  <span>Contact & Map Location</span>
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Column 3: Travel Services */}
-          <div className="footer-col">
-            <h4 className="footer-col-title">Our Services</h4>
-            <div className="footer-title-divider" />
-            <ul className="footer-services-list">
-              <li>Airport Pickup & Drop (Kempegowda BLR)</li>
-              <li>Local 4-Hour / 40 KM Package</li>
-              <li>Local 8-Hour / 80 KM Package</li>
-              <li>Outstation One-Way Transfers</li>
-              <li>Outstation Round-Trip Tours</li>
-              <li>Force Traveller & Group Mini Coach</li>
-              <li>Corporate & PAN India Travel</li>
-            </ul>
-          </div>
-
-          {/* Column 4: Direct Contact & Location */}
-          <div className="footer-col">
-            <h4 className="footer-col-title">Direct Contact</h4>
-            <div className="footer-title-divider" />
-            <div className="footer-contact-items">
-              <div className="footer-contact-row">
-                <Phone size={16} className="contact-icon text-gold" />
-                <div className="contact-text">
-                  <span className="contact-label">Primary Hotline</span>
-                  <a href={`tel:${BUSINESS_INFO.primaryPhone}`} className="contact-val highlight-val">
-                    {BUSINESS_INFO.primaryPhoneDisplay}
-                  </a>
-                </div>
-              </div>
-
-              <div className="footer-contact-row">
-                <Phone size={16} className="contact-icon" />
-                <div className="contact-text">
-                  <span className="contact-label">Alternate Contact</span>
-                  <a href={`tel:${BUSINESS_INFO.alternatePhone}`} className="contact-val">
-                    {BUSINESS_INFO.alternatePhoneDisplay}
-                  </a>
-                </div>
-              </div>
-
-              <div className="footer-contact-row">
-                <Mail size={16} className="contact-icon" />
-                <div className="contact-text">
-                  <span className="contact-label">Email Inquiries</span>
-                  <a href={`mailto:${BUSINESS_INFO.email}`} className="contact-val">
-                    {BUSINESS_INFO.email}
-                  </a>
-                </div>
-              </div>
-
-              <div className="footer-contact-row">
-                <MapPin size={16} className="contact-icon text-gold" />
-                <div className="contact-text">
-                  <span className="contact-label">Operational Hub</span>
-                  <span className="contact-val">{BUSINESS_INFO.location.fullDisplay}</span>
-                </div>
-              </div>
-
-              <div className="footer-contact-row">
-                <Clock size={16} className="contact-icon" />
-                <div className="contact-text">
-                  <span className="contact-label">Availability</span>
-                  <span className="contact-val">{BUSINESS_INFO.operatingHours}</span>
-                </div>
+            <div className="footer-follow-block">
+              <span className="follow-title">Follow Us</span>
+              <div className="footer-social-icons">
+                <a href="https://facebook.com" target="_blank" rel="noreferrer" className="soc-btn fb">f</a>
+                <a href="https://instagram.com" target="_blank" rel="noreferrer" className="soc-btn ig">ig</a>
+                <a href="https://youtube.com" target="_blank" rel="noreferrer" className="soc-btn yt">▶</a>
+                <a href="https://wa.me/919035897960" target="_blank" rel="noreferrer" className="soc-btn wa">wa</a>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Airport Area Notice Banner */}
-        <div className="footer-notice-box">
-          <div className="notice-icon-frame">
-            <ShieldCheck size={20} className="notice-icon text-gold" />
-          </div>
-          <p className="notice-text">
-            <strong>Location Notice:</strong> SKB Tour and Travels operates from the Airport area (PIN 560300) with rapid dispatch to Kempegowda International Airport terminals and key highway corridors. Please confirm written fares prior to boarding.
+        {/* Bottom Row */}
+        <div className="footer-bottom-row">
+          <p className="copyright-clean">
+            © {currentYear} <strong>{BUSINESS_INFO.name}</strong>. All rights reserved.
           </p>
-        </div>
-
-        {/* Lower Copyright Row */}
-        <div className="footer-bottom">
-          <p className="copyright-text">
-            © {currentYear} <strong>{BUSINESS_INFO.name}</strong>. All rights reserved. Your Journey, Our Priority.
+          <p className="designer-credit">
+            Designed and developed by <strong>bookmywebsite.in</strong>
           </p>
-          <div className="footer-bottom-links">
-            <span className="footer-sub-note">Airport • City • Outstation • PAN India</span>
-          </div>
         </div>
       </div>
     </footer>

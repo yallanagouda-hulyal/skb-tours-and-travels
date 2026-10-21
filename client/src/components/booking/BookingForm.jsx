@@ -1,28 +1,12 @@
 import React, { useState } from 'react';
-import {
-  User,
-  Phone,
-  MapPin,
-  Calendar,
-  Clock,
-  Car,
-  Users,
-  Briefcase,
-  AlertCircle,
-  CheckCircle,
-  MessageSquare,
-  Send,
-  Info,
-} from 'lucide-react';
-import Button from '../ui/Button';
-import Modal from '../ui/Modal';
+import { MessageSquare, Phone, CheckCircle2, AlertCircle } from 'lucide-react';
 import { submitBooking } from '../../services/api';
 import { createWhatsAppBookingUrl } from '../../utils/whatsapp';
 import { BUSINESS_INFO } from '../../data/businessInfo';
+import Modal from '../ui/Modal';
 import './BookingForm.css';
 
 export default function BookingForm({ initialValues = {} }) {
-  // Today's date string YYYY-MM-DD for datepicker min attribute
   const todayStr = new Date().toISOString().split('T')[0];
 
   const [formData, setFormData] = useState({
@@ -32,507 +16,283 @@ export default function BookingForm({ initialValues = {} }) {
     pickupLocation: initialValues.pickupLocation || '',
     destination: initialValues.destination || '',
     travelDate: initialValues.travelDate || todayStr,
-    pickupTime: initialValues.pickupTime || '',
     preferredVehicle: initialValues.preferredVehicle || 'Toyota Innova Crysta',
     passengerCount: initialValues.passengerCount || 1,
     returnDate: initialValues.returnDate || '',
     additionalStops: initialValues.additionalStops || '',
-    luggageInfo: initialValues.luggageInfo || '',
     additionalInstructions: initialValues.additionalInstructions || '',
   });
 
   const [errors, setErrors] = useState({});
   const [submitting, setSubmitting] = useState(false);
-  const [submissionSuccess, setSubmissionSuccess] = useState(null); // stores response object
-  const [submissionError, setSubmissionError] = useState('');
   const [modalOpen, setModalOpen] = useState(false);
+  const [successData, setSuccessData] = useState(null);
 
-  const tripTypeOptions = [
+  const tripTypes = [
     { value: 'airport_transfer', label: 'Airport Transfer (Pickup / Drop)' },
-    { value: 'local_4h_40km', label: 'Local City Trip (4H / 40KM Package)' },
-    { value: 'local_8h_80km', label: 'Local City Trip (8H / 80KM Package)' },
+    { value: 'local_4h_40km', label: 'Local City Trip (4H / 40KM)' },
+    { value: 'local_8h_80km', label: 'Local City Trip (8H / 80KM)' },
     { value: 'outstation_oneway', label: 'Outstation One-Way Drop' },
     { value: 'outstation_round', label: 'Outstation Round Trip' },
-    { value: 'pan_india', label: 'PAN India Highway Travel' },
     { value: 'group_travel', label: 'Family & Group Travel' },
   ];
 
   const vehicleOptions = [
     'Toyota Innova Crysta',
-    'Executive Sedan 4+1 (Dzire / Etios)',
-    'Force Traveller / TT',
-    'Luxury Urbania',
-    'Other / Please advise suitable vehicle',
+    'Sedan 4+1 (Dzire / Etios)',
+    'Force Traveller',
+    'Urbania',
+    'Tempo Traveller (TT)',
+    'Other / Custom Requirement',
   ];
 
   const validate = () => {
-    const newErrors = {};
-
-    if (!formData.fullName.trim()) {
-      newErrors.fullName = 'Full name is required.';
-    }
-
+    const errs = {};
+    if (!formData.fullName.trim()) errs.fullName = 'Please enter your name.';
     const cleanPhone = formData.phoneNumber.replace(/\s+/g, '');
-    const phoneRegex = /^(?:\+?91[\-\s]?)?[6789]\d{9}$/;
-    if (!cleanPhone) {
-      newErrors.phoneNumber = 'Phone number is required.';
-    } else if (!phoneRegex.test(cleanPhone)) {
-      newErrors.phoneNumber = 'Please enter a valid 10-digit mobile number.';
+    if (!cleanPhone || cleanPhone.length < 10) {
+      errs.phoneNumber = 'Enter a valid 10-digit mobile number.';
     }
-
-    if (!formData.pickupLocation.trim()) {
-      newErrors.pickupLocation = 'Pickup location is required.';
-    }
-
-    if (!formData.destination.trim()) {
-      newErrors.destination = 'Destination is required.';
-    }
-
-    if (!formData.travelDate) {
-      newErrors.travelDate = 'Travel date is required.';
-    } else if (formData.travelDate < todayStr) {
-      newErrors.travelDate = 'Travel date cannot be in the past.';
-    }
-
-    if (!formData.preferredVehicle) {
-      newErrors.preferredVehicle = 'Please choose a vehicle category.';
-    }
-
-    if (formData.tripType === 'outstation_round' && formData.returnDate) {
-      if (formData.returnDate < formData.travelDate) {
-        newErrors.returnDate = 'Return date cannot be earlier than travel date.';
-      }
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    if (!formData.pickupLocation.trim()) errs.pickupLocation = 'Enter pickup location.';
+    if (!formData.destination.trim()) errs.destination = 'Enter destination.';
+    if (!formData.travelDate) errs.travelDate = 'Select travel date.';
+    setErrors(errs);
+    return Object.keys(errs).length === 0;
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    if (errors[name]) {
-      setErrors((prev) => ({ ...prev, [name]: '' }));
-    }
-    if (submissionError) {
-      setSubmissionError('');
-    }
+    if (errors[name]) setErrors((prev) => ({ ...prev, [name]: '' }));
   };
 
-  // Submit via Database API
-  const handleSubmit = async (e) => {
+  const handleWhatsAppSubmit = async (e) => {
     e.preventDefault();
     if (!validate()) return;
 
     setSubmitting(true);
-    setSubmissionError('');
+    let waUrl = createWhatsAppBookingUrl(formData);
 
     try {
-      const response = await submitBooking(formData);
-      setSubmissionSuccess(response);
-      setModalOpen(true);
+      const res = await submitBooking(formData);
+      setSuccessData(res);
+      if (res.whatsappUrl) {
+        waUrl = res.whatsappUrl;
+      }
     } catch (err) {
-      // If DB save failed, still generate clean WhatsApp flow without losing data
-      console.warn('Booking submit error:', err.message);
-      setSubmissionError(
-        'Database connection took longer than expected. You can still confirm your booking immediately via WhatsApp below.'
-      );
-      // Construct fallback booking object
-      const fallbackBooking = {
-        ...formData,
-        bookingReference: `SKB-${Date.now().toString().slice(-6)}`,
-      };
-      setSubmissionSuccess({
-        success: true,
-        booking: fallbackBooking,
-        whatsappUrl: createWhatsAppBookingUrl(fallbackBooking),
-      });
-      setModalOpen(true);
+      console.warn('Backend offline fallback for WhatsApp submission');
     } finally {
       setSubmitting(false);
+      window.open(waUrl, '_blank', 'noopener,noreferrer');
+      setModalOpen(true);
     }
   };
 
-  // Direct WhatsApp Submission Button (Validates first, builds URL, opens WhatsApp)
-  const handleDirectWhatsApp = () => {
-    if (!validate()) return;
-
-    const waUrl = createWhatsAppBookingUrl(formData);
-    window.open(waUrl, '_blank', 'noopener,noreferrer');
-  };
-
   return (
-    <div className="booking-form-wrapper">
-      <div className="form-disclaimer-card">
-        <Info size={18} className="disclaimer-icon text-gold" />
-        <p className="disclaimer-text">
-          <strong>Enquiry Notice:</strong> Submitting this form sends your travel requirements directly to Vicky. All bookings remain enquiries until vehicle availability and the exact written fare are confirmed.
-        </p>
-      </div>
+    <div className="booking-card-white-2col">
+      <form onSubmit={handleWhatsAppSubmit} className="booking-form-split-grid" noValidate>
+        {/* Left Column: Trip Information */}
+        <div className="booking-left-column">
+          <h3 className="column-header-title">Trip Information</h3>
 
-      <form onSubmit={handleSubmit} className="booking-form" noValidate>
-        {/* Section 1: Customer Details */}
-        <div className="form-section-title">
-          <span className="section-number">1</span>
-          <h4>Customer & Contact Information</h4>
-        </div>
-
-        <div className="form-grid-2">
-          {/* Full Name */}
-          <div className="form-group">
-            <label htmlFor="fullName" className="form-label required">
-              <User size={15} className="input-icon" />
-              <span>Full Name</span>
-            </label>
-            <input
-              id="fullName"
-              name="fullName"
-              type="text"
-              placeholder="e.g. Ramesh Kumar"
-              value={formData.fullName}
-              onChange={handleChange}
-              className={`form-input ${errors.fullName ? 'input-error' : ''}`}
-              aria-required="true"
-              aria-invalid={!!errors.fullName}
-            />
-            {errors.fullName && <span className="field-error-msg">{errors.fullName}</span>}
-          </div>
-
-          {/* Phone Number */}
-          <div className="form-group">
-            <label htmlFor="phoneNumber" className="form-label required">
-              <Phone size={15} className="input-icon" />
-              <span>Phone Number (10 Digits)</span>
-            </label>
-            <input
-              id="phoneNumber"
-              name="phoneNumber"
-              type="tel"
-              placeholder="e.g. 9035897960"
-              value={formData.phoneNumber}
-              onChange={handleChange}
-              className={`form-input ${errors.phoneNumber ? 'input-error' : ''}`}
-              aria-required="true"
-              aria-invalid={!!errors.phoneNumber}
-            />
-            {errors.phoneNumber && <span className="field-error-msg">{errors.phoneNumber}</span>}
-          </div>
-        </div>
-
-        {/* Section 2: Journey Details */}
-        <div className="form-section-title">
-          <span className="section-number">2</span>
-          <h4>Trip & Route Specifications</h4>
-        </div>
-
-        <div className="form-grid-3">
-          {/* Trip Type */}
-          <div className="form-group">
-            <label htmlFor="tripType" className="form-label required">
-              <span>Trip Type</span>
-            </label>
+          <div className="b-field-group">
+            <label className="b-label">Trip Type *</label>
             <select
-              id="tripType"
               name="tripType"
               value={formData.tripType}
               onChange={handleChange}
-              className="form-select"
+              className="b-select"
             >
-              {tripTypeOptions.map((opt) => (
-                <option key={opt.value} value={opt.value}>
-                  {opt.label}
+              {tripTypes.map((t) => (
+                <option key={t.value} value={t.value}>
+                  {t.label}
                 </option>
               ))}
             </select>
           </div>
 
-          {/* Pickup Location */}
-          <div className="form-group">
-            <label htmlFor="pickupLocation" className="form-label required">
-              <MapPin size={15} className="input-icon" />
-              <span>Pickup Location</span>
-            </label>
+          <div className="b-field-group">
+            <label className="b-label">Pickup Location *</label>
             <input
-              id="pickupLocation"
-              name="pickupLocation"
               type="text"
-              placeholder="Airport T1 / T2, or City Address"
+              name="pickupLocation"
+              placeholder="e.g. Bengaluru"
               value={formData.pickupLocation}
               onChange={handleChange}
-              className={`form-input ${errors.pickupLocation ? 'input-error' : ''}`}
-              aria-required="true"
+              className={`b-input ${errors.pickupLocation ? 'b-err' : ''}`}
             />
-            {errors.pickupLocation && <span className="field-error-msg">{errors.pickupLocation}</span>}
+            {errors.pickupLocation && <span className="b-err-text">{errors.pickupLocation}</span>}
           </div>
 
-          {/* Destination */}
-          <div className="form-group">
-            <label htmlFor="destination" className="form-label required">
-              <MapPin size={15} className="input-icon" />
-              <span>Destination</span>
-            </label>
+          <div className="b-field-group">
+            <label className="b-label">Destination *</label>
             <input
-              id="destination"
-              name="destination"
               type="text"
-              placeholder="e.g. Mysore, Whitefield, Ooty"
+              name="destination"
+              placeholder="e.g. Mysore"
               value={formData.destination}
               onChange={handleChange}
-              className={`form-input ${errors.destination ? 'input-error' : ''}`}
-              aria-required="true"
+              className={`b-input ${errors.destination ? 'b-err' : ''}`}
             />
-            {errors.destination && <span className="field-error-msg">{errors.destination}</span>}
+            {errors.destination && <span className="b-err-text">{errors.destination}</span>}
           </div>
-        </div>
 
-        {/* Date & Time Row */}
-        <div className="form-grid-3">
-          {/* Travel Date */}
-          <div className="form-group">
-            <label htmlFor="travelDate" className="form-label required">
-              <Calendar size={15} className="input-icon" />
-              <span>Travel Date</span>
-            </label>
+          <div className="b-field-group">
+            <label className="b-label">Travel Date *</label>
             <input
-              id="travelDate"
-              name="travelDate"
               type="date"
+              name="travelDate"
               min={todayStr}
               value={formData.travelDate}
               onChange={handleChange}
-              className={`form-input ${errors.travelDate ? 'input-error' : ''}`}
-              aria-required="true"
+              className={`b-input ${errors.travelDate ? 'b-err' : ''}`}
             />
-            {errors.travelDate && <span className="field-error-msg">{errors.travelDate}</span>}
+            {errors.travelDate && <span className="b-err-text">{errors.travelDate}</span>}
           </div>
 
-          {/* Pickup Time */}
-          <div className="form-group">
-            <label htmlFor="pickupTime" className="form-label">
-              <Clock size={15} className="input-icon" />
-              <span>Pickup Time (Optional)</span>
-            </label>
-            <input
-              id="pickupTime"
-              name="pickupTime"
-              type="text"
-              placeholder="e.g. 06:30 AM or 10:00 PM"
-              value={formData.pickupTime}
-              onChange={handleChange}
-              className="form-input"
-            />
+          {/* WhatsApp Direct Dispatch Box (Green Panel) */}
+          <div className="b-wa-dispatch-card">
+            <div className="b-wa-notice-row">
+              <span className="wa-bubble-icon">💬</span>
+              <div className="wa-notice-text">
+                <span className="wa-small-tag">Your enquiry will be sent to</span>
+                <span className="wa-bold-phone">{BUSINESS_INFO.primaryPhone}</span>
+              </div>
+            </div>
+
+            <button type="submit" disabled={submitting} className="btn-continue-wa-green">
+              <span>{submitting ? 'Preparing...' : 'Continue on WhatsApp'}</span>
+            </button>
+
+            <p className="wa-footer-note">
+              You will be redirected to WhatsApp with your booking details.
+            </p>
+          </div>
+        </div>
+
+        {/* Right Column: Your Details */}
+        <div className="booking-right-column">
+          <h3 className="column-header-title">Your Details</h3>
+
+          <div className="b-row-2">
+            <div className="b-field-group">
+              <label className="b-label">Full Name *</label>
+              <input
+                type="text"
+                name="fullName"
+                placeholder="Enter your name"
+                value={formData.fullName}
+                onChange={handleChange}
+                className={`b-input ${errors.fullName ? 'b-err' : ''}`}
+              />
+              {errors.fullName && <span className="b-err-text">{errors.fullName}</span>}
+            </div>
+
+            <div className="b-field-group">
+              <label className="b-label">Phone Number *</label>
+              <input
+                type="tel"
+                name="phoneNumber"
+                placeholder="Enter 10-digit mobile number"
+                value={formData.phoneNumber}
+                onChange={handleChange}
+                className={`b-input ${errors.phoneNumber ? 'b-err' : ''}`}
+              />
+              {errors.phoneNumber && <span className="b-err-text">{errors.phoneNumber}</span>}
+            </div>
           </div>
 
-          {/* Return Date (if Round trip) */}
-          <div className="form-group">
-            <label htmlFor="returnDate" className="form-label">
-              <Calendar size={15} className="input-icon" />
-              <span>Return Date (For Round Trips)</span>
-            </label>
+          <div className="b-row-2">
+            <div className="b-field-group">
+              <label className="b-label">Preferred Vehicle *</label>
+              <select
+                name="preferredVehicle"
+                value={formData.preferredVehicle}
+                onChange={handleChange}
+                className="b-select"
+              >
+                {vehicleOptions.map((v) => (
+                  <option key={v} value={v}>
+                    {v}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="b-field-group">
+              <label className="b-label">Passengers</label>
+              <input
+                type="number"
+                name="passengerCount"
+                min="1"
+                placeholder="No. of Passengers"
+                value={formData.passengerCount}
+                onChange={handleChange}
+                className="b-input"
+              />
+            </div>
+          </div>
+
+          <div className="b-field-group">
+            <label className="b-label">Return Date (if applicable)</label>
             <input
-              id="returnDate"
-              name="returnDate"
               type="date"
+              name="returnDate"
               min={formData.travelDate || todayStr}
               value={formData.returnDate}
               onChange={handleChange}
-              className={`form-input ${errors.returnDate ? 'input-error' : ''}`}
-            />
-            {errors.returnDate && <span className="field-error-msg">{errors.returnDate}</span>}
-          </div>
-        </div>
-
-        {/* Section 3: Vehicle & Luggage */}
-        <div className="form-section-title">
-          <span className="section-number">3</span>
-          <h4>Vehicle Preference & Group Details</h4>
-        </div>
-
-        <div className="form-grid-3">
-          {/* Preferred Vehicle */}
-          <div className="form-group">
-            <label htmlFor="preferredVehicle" className="form-label required">
-              <Car size={15} className="input-icon" />
-              <span>Preferred Vehicle</span>
-            </label>
-            <select
-              id="preferredVehicle"
-              name="preferredVehicle"
-              value={formData.preferredVehicle}
-              onChange={handleChange}
-              className="form-select"
-            >
-              {vehicleOptions.map((v) => (
-                <option key={v} value={v}>
-                  {v}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          {/* Passenger Count */}
-          <div className="form-group">
-            <label htmlFor="passengerCount" className="form-label">
-              <Users size={15} className="input-icon" />
-              <span>Number of Passengers</span>
-            </label>
-            <input
-              id="passengerCount"
-              name="passengerCount"
-              type="number"
-              min="1"
-              max="35"
-              value={formData.passengerCount}
-              onChange={handleChange}
-              className="form-input"
+              className="b-input"
             />
           </div>
 
-          {/* Luggage Info */}
-          <div className="form-group">
-            <label htmlFor="luggageInfo" className="form-label">
-              <Briefcase size={15} className="input-icon" />
-              <span>Luggage Quantity (Optional)</span>
-            </label>
+          <div className="b-field-group">
+            <label className="b-label">Additional Stops</label>
             <input
-              id="luggageInfo"
-              name="luggageInfo"
               type="text"
-              placeholder="e.g. 2 large bags, 1 pram"
-              value={formData.luggageInfo}
-              onChange={handleChange}
-              className="form-input"
-            />
-          </div>
-        </div>
-
-        {/* Additional Stops & Instructions */}
-        <div className="form-grid-2">
-          <div className="form-group">
-            <label htmlFor="additionalStops" className="form-label">
-              <span>Intermediate Stops / Via Route (Optional)</span>
-            </label>
-            <input
-              id="additionalStops"
               name="additionalStops"
-              type="text"
-              placeholder="e.g. Via Mandya or Hebbal Flyover"
+              placeholder="e.g. Sightseeing, Multiple Locations"
               value={formData.additionalStops}
               onChange={handleChange}
-              className="form-input"
+              className="b-input"
             />
           </div>
 
-          <div className="form-group">
-            <label htmlFor="additionalInstructions" className="form-label">
-              <span>Special Instructions / Flight Details</span>
-            </label>
-            <input
-              id="additionalInstructions"
+          <div className="b-field-group">
+            <label className="b-label">Additional Instructions</label>
+            <textarea
               name="additionalInstructions"
-              type="text"
-              placeholder="e.g. Flight 6E-241 landing at T2, need child seat"
+              rows={3}
+              placeholder="Any special requests?"
               value={formData.additionalInstructions}
               onChange={handleChange}
-              className="form-input"
+              className="b-input b-textarea"
             />
           </div>
         </div>
-
-        {/* Submission Actions */}
-        <div className="form-submit-row">
-          <Button
-            type="submit"
-            variant="primary"
-            size="lg"
-            loading={submitting}
-            icon={<Send size={18} />}
-            className="btn-main-submit"
-          >
-            Submit Booking Enquiry
-          </Button>
-
-          <Button
-            type="button"
-            variant="whatsapp"
-            size="lg"
-            icon={<MessageSquare size={18} />}
-            onClick={handleDirectWhatsApp}
-            className="btn-wa-submit"
-          >
-            Continue on WhatsApp
-          </Button>
-        </div>
-
-        {submissionError && (
-          <div className="submission-error-alert">
-            <AlertCircle size={18} />
-            <span>{submissionError}</span>
-          </div>
-        )}
       </form>
 
       {/* Confirmation Modal */}
       <Modal
         isOpen={modalOpen}
         onClose={() => setModalOpen(false)}
-        title="Travel Enquiry Successfully Submitted"
+        title="Booking Enquiry Sent"
       >
-        <div className="modal-success-content">
-          <div className="success-icon-badge">
-            <CheckCircle size={44} className="text-gold" />
-          </div>
-
-          <h3 className="success-title">Thank You, {submissionSuccess?.booking?.fullName}!</h3>
-          
-          <div className="ref-id-card">
-            <span className="ref-label">Booking Reference ID:</span>
-            <span className="ref-number">{submissionSuccess?.booking?.bookingReference}</span>
-          </div>
-
-          <p className="success-message-text">
-            Your travel request has been logged. Vicky from <strong>SKB Tour and Travels</strong> will review vehicle availability and reach out with the exact written fare.
+        <div className="booking-modal-content">
+          <CheckCircle2 size={44} className="text-gold mb-2" />
+          <h3 className="modal-heading-clean">Enquiry Successfully Logged!</h3>
+          <p className="modal-sub-clean">
+            Reference ID: <strong>{successData?.booking?.bookingReference || 'SKB-BOOKING'}</strong>
           </p>
-
-          <div className="modal-summary-box">
-            <div className="summary-row">
-              <span className="summary-label">Route:</span>
-              <span className="summary-val">{submissionSuccess?.booking?.pickupLocation} ➔ {submissionSuccess?.booking?.destination}</span>
-            </div>
-            <div className="summary-row">
-              <span className="summary-label">Vehicle:</span>
-              <span className="summary-val">{submissionSuccess?.booking?.preferredVehicle}</span>
-            </div>
-            <div className="summary-row">
-              <span className="summary-label">Contact:</span>
-              <span className="summary-val">{submissionSuccess?.booking?.phoneNumber}</span>
-            </div>
-          </div>
-
-          <div className="modal-actions-stack">
-            <a
-              href={submissionSuccess?.whatsappUrl || createWhatsAppBookingUrl(formData)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="modal-wa-btn"
-            >
-              <MessageSquare size={18} />
-              <span>Fast-Track Confirmation on WhatsApp</span>
-            </a>
-
-            <a href={`tel:${BUSINESS_INFO.primaryPhone}`} className="modal-call-btn">
-              <Phone size={16} />
-              <span>Call Vicky ({BUSINESS_INFO.primaryPhoneDisplay})</span>
-            </a>
-
-            <button
-              type="button"
-              className="modal-done-btn"
-              onClick={() => setModalOpen(false)}
-            >
-              Done & Return to Site
-            </button>
-          </div>
+          <p className="modal-desc-clean">
+            Your travel request has been recorded. Vicky will confirm vehicle availability and exact written fare on WhatsApp or phone.
+          </p>
+          <button
+            type="button"
+            className="btn-continue-wa-green mt-3"
+            onClick={() => setModalOpen(false)}
+          >
+            Done
+          </button>
         </div>
       </Modal>
     </div>
