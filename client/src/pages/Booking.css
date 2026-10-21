@@ -1,0 +1,90 @@
+/* ==========================================================================
+   PAGE 4: BOOKING ENQUIRY STYLES
+   ========================================================================== */
+
+.booking-page-root {
+  overflow-x: hidden;
+}
+
+.booking-hero-banner {
+  background: linear-gradient(180deg, #051121 0%, var(--color-navy) 100%);
+  padding: 5rem 0 3rem;
+  text-align: center;
+}
+
+.booking-hero-content {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.booking-hero-title {
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  font-weight: 800;
+  color: var(--color-pearl);
+  margin-top: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.booking-hero-desc {
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--color-pearl-muted);
+}
+
+.booking-form-section {
+  background: var(--color-navy);
+}
+
+.booking-contact-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+  background: rgba(13, 34, 63, 0.45);
+  border: 1px solid var(--color-gold-border);
+  backdrop-filter: blur(10px);
+  border-radius: var(--radius-lg);
+  padding: 1rem 2rem;
+  margin-bottom: 2.5rem;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.strip-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.strip-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.strip-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-pearl-muted);
+}
+
+.strip-val {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-pearl);
+}
+
+a.strip-val:hover {
+  color: var(--color-gold);
+}
+
+@media (max-width: 768px) {
+  .booking-contact-strip {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+    padding: 1.25rem;
+  }
+}

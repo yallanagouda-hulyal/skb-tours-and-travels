@@ -1,0 +1,13 @@
+/* App Layout Styling */
+.app-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-navy);
+  color: var(--color-pearl);
+  position: relative;
+}
+
+.main-content {
+  flex: 1 0 auto;
+}
