@@ -24,16 +24,19 @@ export function AdminAuthProvider({ children }) {
       fetch(`${API_BASE}/admin/auth/me`, {
         headers: { Authorization: `Bearer ${token}` },
       })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.success && data.admin) {
-            setAdmin(data.admin);
-            localStorage.setItem(ADMIN_USER_KEY, JSON.stringify(data.admin));
-          } else {
-            // If offline, keep local state; if 401/403, remove
-            if (data.status === 401 || data.status === 403) {
+        .then(async (res) => {
+          if (!res.ok) {
+            if (res.status === 401 || res.status === 403) {
               logout();
             }
+            return null;
+          }
+          return await res.json();
+        })
+        .then((data) => {
+          if (data && data.success && data.admin) {
+            setAdmin(data.admin);
+            localStorage.setItem(ADMIN_USER_KEY, JSON.stringify(data.admin));
           }
         })
         .catch(() => {
@@ -53,10 +56,15 @@ export function AdminAuthProvider({ children }) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
       });
-      const data = await res.json();
+      let data = null;
+      try {
+        data = await res.json();
+      } catch {
+        // Not a JSON response
+      }
 
-      if (!res.ok || !data.success) {
-        throw new Error(data.message || 'Login failed. Please check credentials.');
+      if (!res.ok || !data?.success) {
+        throw new Error(data?.message || `Server error (${res.status}). Server might be offline.`);
       }
 
       setToken(data.token);

@@ -20,13 +20,19 @@ async function request(endpoint, options = {}) {
 
   try {
     const res = await fetch(url, { ...options, headers });
-    const data = await res.json();
     if (!res.ok) {
-      throw new Error(data.message || `API error ${res.status}`);
+      let errorMessage = `API error ${res.status}`;
+      try {
+        const errorData = await res.json();
+        if (errorData?.message) errorMessage = errorData.message;
+      } catch {
+        // Response is not JSON (e.g., 502 Bad Gateway / offline server)
+      }
+      throw new Error(errorMessage);
     }
-    return data;
+    return await res.json();
   } catch (err) {
-    console.warn(`[AdminAPI Warning] request to ${endpoint} failed:`, err.message);
+    console.warn(`[AdminAPI] request to ${endpoint} failed (${err.message}). Using offline fallback.`);
     throw err;
   }
 }

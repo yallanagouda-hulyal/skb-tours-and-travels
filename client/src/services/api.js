@@ -14,11 +14,17 @@ export async function submitBooking(bookingPayload) {
       body: JSON.stringify(bookingPayload),
     });
 
-    const data = await res.json();
     if (!res.ok) {
-      throw new Error(data.message || 'Server rejected the booking enquiry.');
+      let msg = 'Server rejected the booking enquiry.';
+      try {
+        const data = await res.json();
+        if (data?.message) msg = data.message;
+      } catch {
+        // Not JSON
+      }
+      throw new Error(msg);
     }
-    return data;
+    return await res.json();
   } catch (error) {
     console.warn('[API Warning] submitBooking failed, falling back to local processing:', error.message);
     throw error;
@@ -35,11 +41,17 @@ export async function submitContact(contactPayload) {
       body: JSON.stringify(contactPayload),
     });
 
-    const data = await res.json();
     if (!res.ok) {
-      throw new Error(data.message || 'Failed to submit contact message.');
+      let msg = 'Failed to submit contact message.';
+      try {
+        const data = await res.json();
+        if (data?.message) msg = data.message;
+      } catch {
+        // Not JSON
+      }
+      throw new Error(msg);
     }
-    return data;
+    return await res.json();
   } catch (error) {
     console.warn('[API Warning] submitContact failed:', error.message);
     throw error;
@@ -49,6 +61,7 @@ export async function submitContact(contactPayload) {
 export async function fetchFleet() {
   try {
     const res = await fetch(`${API_BASE}/fleet`);
+    if (!res.ok) return null;
     const data = await res.json();
     return data.fleet;
   } catch (error) {

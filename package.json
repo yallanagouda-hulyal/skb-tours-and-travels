@@ -1,0 +1,15 @@
+{
+  "name": "skb-tours-and-travels",
+  "version": "1.0.0",
+  "description": "SKB Tour and Travels Full-Stack Web Application",
+  "scripts": {
+    "dev": "npm run dev --prefix client",
+    "server": "npm start --prefix server",
+    "start": "npm start --prefix server",
+    "build": "npm run build --prefix client",
+    "seed": "npm run seed --prefix server"
+  },
+  "keywords": [],
+  "author": "SKB Tour and Travels",
+  "license": "ISC"
+}
