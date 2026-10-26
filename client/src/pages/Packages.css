@@ -10,41 +10,39 @@
 
 /* 1. Header Banner */
 .packages-banner-navy {
-  background: linear-gradient(135deg, #071426 0%, #0d223f 70%, #071426 100%);
+  position: relative;
+  background: 
+    radial-gradient(circle at 82% 28%, rgba(231, 184, 77, 0.16) 0%, transparent 48%),
+    radial-gradient(circle at 12% 75%, rgba(30, 58, 95, 0.45) 0%, transparent 52%),
+    linear-gradient(135deg, #030811 0%, #071426 50%, #0c203b 100%);
   color: #F7F9FC;
-  padding: 3.5rem 0 2.5rem;
-  border-bottom: 2px solid rgba(231, 184, 77, 0.25);
+  padding: 4.5rem 0 3.75rem;
+  border-bottom: 2px solid rgba(231, 184, 77, 0.35);
+  overflow: hidden;
+}
+
+.packages-banner-navy::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(231, 184, 77, 0.08) 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
+  opacity: 0.7;
 }
 
 .packages-banner-grid {
   display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 2rem;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 3rem;
   align-items: center;
+  position: relative;
+  z-index: 2;
 }
 
-.packages-main-title {
-  font-family: var(--font-heading);
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--color-gold);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-bottom: 0.25rem;
-}
-
-.packages-main-sub {
-  font-family: 'Times New Roman', Times, serif, var(--font-heading);
-  font-size: clamp(2rem, 3.8vw, 3rem);
-  font-weight: 800;
-  line-height: 1.15;
-  color: #F7F9FC;
-  margin-bottom: 0.75rem;
-}
-
-.packages-main-desc {
-  font-size: 0.95rem;
-  color: #b8c7db;
+.packages-banner-left {
+  display: flex;
+  flex-direction: column;
 }
 
 .packages-banner-right {
@@ -541,8 +539,16 @@
 
 /* Responsive */
 @media (max-width: 1024px) {
+  .packages-banner-navy {
+    padding: 3.5rem 0 2.75rem;
+  }
   .packages-banner-grid {
     grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .packages-banner-left {
+    text-align: center;
+    align-items: center;
   }
   .pricing-cards-grid-4 {
     grid-template-columns: repeat(2, 1fr);
@@ -558,11 +564,24 @@
 }
 
 @media (max-width: 640px) {
+  .packages-banner-navy {
+    padding: 2.75rem 0 2rem;
+  }
   .pricing-cards-grid-4 {
     grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  .pricing-luxury-card {
+    padding: 1.5rem 1.25rem;
   }
   .included-cards-grid {
     grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .conditions-luxury-card {
+    padding: 1.5rem 1.25rem;
+    border-radius: 14px;
+    gap: 1.5rem;
   }
   .conditions-items-grid {
     grid-template-columns: 1fr;

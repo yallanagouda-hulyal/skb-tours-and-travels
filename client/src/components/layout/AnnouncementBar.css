@@ -102,3 +102,16 @@
     justify-content: center;
   }
 }
+
+@media (max-width: 500px) {
+  .ann-socials {
+    display: none;
+  }
+  .ann-phones {
+    gap: 0.35rem;
+    font-size: 0.72rem;
+  }
+  .announcement-bar {
+    padding: 0.25rem 0;
+  }
+}

@@ -159,6 +159,14 @@ button {
   }
 }
 
+@media (max-width: 640px) {
+  .container,
+  .container-narrow {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
 /* Section Header Shared Style */
 .section-header {
   text-align: center;

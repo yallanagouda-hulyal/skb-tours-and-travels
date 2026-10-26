@@ -118,7 +118,7 @@
 .navbar-actions {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.85rem;
 }
 
 .btn-book-gold {
@@ -219,5 +219,21 @@
   }
   .brand-name-dark {
     font-size: 1.05rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .navbar-container {
+    gap: 0.5rem;
+  }
+  .brand-logo-frame-white {
+    width: 36px;
+    height: 36px;
+  }
+  .brand-name-dark {
+    font-size: 0.92rem;
+  }
+  .brand-tagline-gold {
+    font-size: 0.6rem;
   }
 }

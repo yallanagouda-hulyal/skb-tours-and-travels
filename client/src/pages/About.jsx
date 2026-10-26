@@ -103,13 +103,13 @@ export default function About() {
                 </div>
               </div>
               <div className="founder-contact-pills">
-                <a href="tel:9035897960" className="founder-phone-link">
-                  <Phone size={14} />
-                  <span>+91 90358 97960</span>
-                </a>
-                <a href="tel:7338140524" className="founder-phone-link alt">
+                <a href="tel:7338140524" className="founder-phone-link">
                   <Phone size={14} />
                   <span>+91 73381 40524</span>
+                </a>
+                <a href="tel:9035897960" className="founder-phone-link alt">
+                  <Phone size={14} />
+                  <span>+91 90358 97960</span>
                 </a>
               </div>
             </div>
@@ -294,12 +294,12 @@ export default function About() {
                   <ArrowRight size={18} />
                 </Link>
                 <a
-                  href="tel:9035897960"
+                  href="tel:7338140524"
                   className="trusted-call-link"
-                  aria-label="Call Vicky on 9035897960"
+                  aria-label="Call Helpline on 7338140524"
                 >
                   <Phone size={16} />
-                  <span>Call: +91 90358 97960</span>
+                  <span>Call: +91 73381 40524</span>
                 </a>
               </div>
             </div>

@@ -94,6 +94,23 @@ exports.createBooking = async (req, res) => {
 
     try {
       savedBooking = await Booking.create(bookingPayload);
+      // Auto-upsert customer record
+      try {
+        const Customer = require('../models/Customer');
+        await Customer.findOneAndUpdate(
+          { phoneNumber: cleanPhone },
+          {
+            $set: {
+              name: fullName.trim(),
+              lastTripDate: parsedDate,
+            },
+            $inc: { totalBookings: 1 },
+          },
+          { upsert: true, new: true }
+        );
+      } catch (custErr) {
+        console.warn('Customer auto-upsert error:', custErr.message);
+      }
     } catch (dbErr) {
       console.warn('[Booking DB Warning] Saving to in-memory fallback:', dbErr.message);
       dbPersisted = false;

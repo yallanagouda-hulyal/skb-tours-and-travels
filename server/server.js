@@ -37,6 +37,8 @@ app.get('/api/health', (req, res) => {
 app.use('/api/bookings', require('./src/routes/bookingRoutes'));
 app.use('/api/contacts', require('./src/routes/contactRoutes'));
 app.use('/api/fleet', require('./src/routes/fleetRoutes'));
+app.use('/api/admin', require('./src/routes/adminRoutes'));
+app.use('/api/public', require('./src/routes/publicRoutes'));
 
 // Serve client dist in production or for unified full-stack serving
 const path = require('path');

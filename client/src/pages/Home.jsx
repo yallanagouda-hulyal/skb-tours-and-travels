@@ -435,15 +435,15 @@ export default function Home() {
                 <ul className="pkg-specs-list">
                   <li className="pkg-spec-item">
                     <MapPin size={16} className="spec-icon-gold" />
-                    <span>Min. Billing: <strong>300 KM / Day</strong></span>
+                    <span>4+1 Dzire: <strong>₹13/km</strong> | 6+1 Innova: <strong>₹22/km</strong></span>
                   </li>
                   <li className="pkg-spec-item">
                     <ArrowLeftRight size={16} className="spec-icon-gold" />
-                    <span>One-Way & Round Trips</span>
+                    <span>Min. Billing: <strong>300 KM / Day Average</strong></span>
                   </li>
                   <li className="pkg-spec-item">
                     <Moon size={16} className="spec-icon-gold" />
-                    <span>Driver Night Allowance: <strong>₹ 400</strong></span>
+                    <span>Driver Beta: <strong>₹400 (Sedan) / ₹500 (Innova)</strong></span>
                   </li>
                   <li className="pkg-spec-item">
                     <FileText size={16} className="spec-icon-gold" />
@@ -500,11 +500,11 @@ export default function Home() {
                 <ul className="pkg-specs-list">
                   <li className="pkg-spec-item">
                     <MapPin size={16} className="spec-icon-gold" />
-                    <span>Bangalore Airport (BLR)</span>
+                    <span>4+1 Dzire: <strong>₹21/km</strong> | 6+1 Innova: <strong>₹40/km</strong></span>
                   </li>
                   <li className="pkg-spec-item">
                     <Plane size={16} className="spec-icon-gold" />
-                    <span>Pickup & Drop Available</span>
+                    <span>Pickup & Drop Available 24/7</span>
                   </li>
                   <li className="pkg-spec-item">
                     <Clock size={16} className="spec-icon-gold" />
@@ -512,7 +512,7 @@ export default function Home() {
                   </li>
                   <li className="pkg-spec-item">
                     <FileText size={16} className="spec-icon-gold" />
-                    <span>Fare Depends on Exact Route</span>
+                    <span>Tolls & Terminal Parking Separate</span>
                   </li>
                 </ul>
 
@@ -591,6 +591,23 @@ export default function Home() {
                     <Users size={15} className="seater-icon-gold" />
                     <span>{vehicle.capacity}</span>
                   </div>
+
+                  {(vehicle.airportRate || vehicle.outstationRate) && (
+                    <div className="vehicle-rates-chips">
+                      {vehicle.airportRate && (
+                        <div className="rate-chip highlight">
+                          <span className="rate-chip-label">Airport:</span>
+                          <span className="rate-chip-val">{vehicle.airportRate}</span>
+                        </div>
+                      )}
+                      {vehicle.outstationRate && (
+                        <div className="rate-chip">
+                          <span className="rate-chip-label">Outstation:</span>
+                          <span className="rate-chip-val">{vehicle.outstationRate}</span>
+                        </div>
+                      )}
+                    </div>
+                  )}
 
                   <p className="vehicle-tagline-text">{vehicle.description}</p>
 
@@ -705,19 +722,19 @@ export default function Home() {
               </Link>
               <div className="journey-call-links-wrap">
                 <a
+                  href="tel:7338140524"
+                  className="journey-quick-call-link"
+                  aria-label="Call Helpline on 7338140524"
+                >
+                  Call: +91 73381 40524
+                </a>
+                <span className="journey-dot">•</span>
+                <a
                   href="tel:9035897960"
                   className="journey-quick-call-link"
                   aria-label="Call Vicky on 9035897960"
                 >
-                  Call: +91 90358 97960
-                </a>
-                <span className="journey-dot">•</span>
-                <a
-                  href="tel:7338140524"
-                  className="journey-quick-call-link"
-                  aria-label="Call Alternate on 7338140524"
-                >
-                  +91 73381 40524
+                  +91 90358 97960
                 </a>
               </div>
             </div>
@@ -872,20 +889,20 @@ export default function Home() {
                 <span>Chat on WhatsApp</span>
               </a>
               <a
+                href="tel:7338140524"
+                className="faq-btn-call"
+                aria-label="Call Helpline on 7338140524"
+              >
+                <Phone size={15} />
+                <span>Call 73381 40524</span>
+              </a>
+              <a
                 href="tel:9035897960"
                 className="faq-btn-call"
                 aria-label="Call Vicky on 9035897960"
               >
                 <Phone size={15} />
                 <span>Call 90358 97960</span>
-              </a>
-              <a
-                href="tel:7338140524"
-                className="faq-btn-call"
-                aria-label="Call Alternate on 7338140524"
-              >
-                <Phone size={15} />
-                <span>Call 73381 40524</span>
               </a>
             </div>
           </div>

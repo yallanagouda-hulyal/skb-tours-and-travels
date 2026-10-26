@@ -15,7 +15,8 @@
 .booking-form-split-grid {
   display: grid;
   grid-template-columns: 1fr 1.25fr;
-  gap: 3rem;
+  column-gap: 3rem;
+  row-gap: 1.5rem;
 }
 
 .column-header-title {
@@ -79,12 +80,21 @@
 }
 
 /* Green WhatsApp Dispatch Card */
+.booking-submit-fullwidth {
+  grid-column: 1 / -1;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
 .b-wa-dispatch-card {
   background: #f0fdf4;
   border: 1px solid #bbf7d0;
   border-radius: var(--radius-md);
-  padding: 1.25rem;
-  margin-top: 1.5rem;
+  padding: 1.25rem 1.5rem;
+  width: 100%;
+  max-width: 600px;
 }
 
 .b-wa-notice-row {
@@ -174,15 +184,40 @@
 @media (max-width: 860px) {
   .booking-form-split-grid {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 1.5rem;
   }
   .booking-card-white-2col {
     padding: 1.5rem;
   }
+  .booking-submit-fullwidth {
+    margin-top: 0;
+  }
+  .b-wa-dispatch-card {
+    max-width: 100%;
+  }
 }
 
 @media (max-width: 550px) {
+  .booking-card-white-2col {
+    padding: 1.25rem 0.95rem;
+    border-radius: 14px;
+  }
+  .column-header-title {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+  }
   .b-row-2 {
     grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  .b-wa-dispatch-card {
+    padding: 1rem;
+  }
+  .wa-bold-phone {
+    font-size: 1rem;
+  }
+  .btn-continue-wa-green {
+    font-size: 0.9rem;
+    padding: 0.7rem;
   }
 }

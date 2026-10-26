@@ -58,7 +58,7 @@ export default function Navbar() {
           </ul>
         </nav>
 
-        {/* Action Button: Book a Ride */}
+        {/* Action Button: Book a Ride & Mobile Hamburger */}
         <div className="navbar-actions">
           <Link to="/booking" className="btn-book-gold">
             Book a Ride

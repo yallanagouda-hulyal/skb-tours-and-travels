@@ -5,9 +5,11 @@ import {
   Clock,
   ShieldCheck,
   CheckCircle,
+  CheckCircle2,
   Sparkles,
   Phone,
   MessageCircle,
+  ArrowRight,
 } from 'lucide-react';
 import './Packages.css';
 
@@ -18,17 +20,78 @@ export default function Packages() {
       <section className="packages-banner-navy" aria-label="Packages and Pricing Banner">
         <div className="container packages-banner-grid">
           <div className="packages-banner-left">
-            <h1 className="packages-main-title">Packages & Pricing</h1>
-            <h2 className="packages-main-sub">Flexible Packages for Every Journey</h2>
-            <p className="packages-main-desc">Choose the best travel plan as per your need.</p>
+            <div className="fleet-badge-pill">
+              <Sparkles size={13} className="badge-sparkle-icon" />
+              <span>TRANSPARENT TRAVEL RATES</span>
+            </div>
+
+            <h1 className="fleet-hero-heading">
+              Flexible Packages for <span className="text-gold-gradient">Every Journey</span>
+            </h1>
+
+            <p className="fleet-hero-desc">
+              Choose the best travel plan tailored for your itinerary. From local city hourly packages to long-distance South India road trips, explore fixed transparent billing with zero surprise surcharges.
+            </p>
+
+            <div className="fleet-hero-perks">
+              <div className="fleet-perk-item">
+                <CheckCircle2 size={15} className="perk-icon" />
+                <span>Local 4H & 8H Tariffs</span>
+              </div>
+              <div className="fleet-perk-item">
+                <CheckCircle2 size={15} className="perk-icon" />
+                <span>Outstation Round Trips</span>
+              </div>
+              <div className="fleet-perk-item">
+                <CheckCircle2 size={15} className="perk-icon" />
+                <span>Dedicated Airport Transfers</span>
+              </div>
+            </div>
+
+            <div className="fleet-hero-actions">
+              <Link to="/booking" className="btn-fleet-hero-gold">
+                <span>Book a Package</span>
+                <ArrowRight size={16} />
+              </Link>
+              <a
+                href="https://wa.me/919035897960?text=Hello%20SKB%20Travels,%20I%20would%20like%20to%20enquire%20about%20travel%20packages%20and%20rates."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-fleet-hero-wa"
+              >
+                <MessageCircle size={16} />
+                <span>Ask on WhatsApp</span>
+              </a>
+            </div>
           </div>
 
           <div className="packages-banner-right">
-            <img
-              src="/assets/images/hero-airport-uhd.jpg"
-              alt="SKB Travel Packages Fleet"
-              className="packages-banner-fleet-img"
-            />
+            <div className="fleet-showcase-frame">
+              <div className="fleet-showcase-glow" />
+
+              <div className="fleet-image-glass-card">
+                <img
+                  src="/assets/images/hero-airport-uhd.jpg"
+                  alt="SKB Travel Packages Fleet"
+                  className="fleet-palace-banner-img"
+                />
+
+                {/* Floating Top Pill */}
+                <div className="fleet-floating-badge top">
+                  <ShieldCheck size={14} className="text-gold" />
+                  <span>Fixed Distance & Hourly Rates</span>
+                </div>
+
+                {/* Floating Bottom Card */}
+                <div className="fleet-floating-badge bottom">
+                  <span className="fleet-pulse-dot" />
+                  <div className="floating-badge-text">
+                    <span className="badge-bold-title">Starting from ₹1,200</span>
+                    <span className="badge-sub-text">Local City 4H / 40KM Package</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -101,14 +164,15 @@ export default function Packages() {
                 <span>Trips</span>
               </div>
               <div className="pricing-card-body">
-                <div className="price-big-text">₹13 / KM</div>
+                <div className="price-big-text">From ₹13 / KM</div>
                 <div className="price-pill-tag">Best for Long Travel</div>
 
                 <ul className="pricing-points-list">
                   <li><span className="dot">•</span> Minimum 300 KM per day (average)</li>
-                  <li><span className="dot">•</span> One-way & Round Trip</li>
-                  <li><span className="dot">•</span> Driver Charges (Night): ₹400 (Separate)</li>
-                  <li><span className="dot">•</span> All India Travel Available</li>
+                  <li><span className="dot">•</span> 4+1 Dzire: ₹13 / KM (Beta ₹400)</li>
+                  <li><span className="dot">•</span> 6+1 Innova Crysta: ₹22 / KM (Beta ₹500)</li>
+                  <li><span className="dot">•</span> 12+1 Tempo Traveller: ₹22 / KM</li>
+                  <li><span className="dot">•</span> One-way & Round Trip Across India</li>
                 </ul>
 
                 <Link
@@ -128,14 +192,16 @@ export default function Packages() {
                 <span>Transfer</span>
               </div>
               <div className="pricing-card-body">
-                <div className="price-big-text">₹21 / KM</div>
+                <div className="price-big-text">From ₹21 / KM</div>
                 <div className="price-pill-tag">Airport Pickup & Drop</div>
 
                 <ul className="pricing-points-list">
+                  <li><span className="dot">•</span> 4+1 Swift Dzire: ₹21 / KM</li>
+                  <li><span className="dot">•</span> 6+1 Innova Crysta: ₹40 / KM</li>
                   <li><span className="dot">•</span> Airport pickup & drop</li>
                   <li><span className="dot">•</span> KM wise calculation</li>
                   <li><span className="dot">•</span> Toll separate (Not included)</li>
-                  <li><span className="dot">•</span> Comfortable & reliable</li>
+                  <li><span className="dot">•</span> 24/7 Flight tracking & assistance</li>
                 </ul>
 
                 <Link
@@ -261,8 +327,8 @@ export default function Packages() {
                 <div className="condition-item-pill">
                   <span className="cond-check-bullet">✓</span>
                   <div>
-                    <strong>Driver Night Allowance:</strong>
-                    <span> ₹400 night allowance applicable between 10:00 PM and 6:00 AM.</span>
+                    <strong>Driver Beta (Separate):</strong>
+                    <span> ₹400 for 4+1 Dzire & ₹500 for 6+1 Innova Crysta.</span>
                   </div>
                 </div>
 
@@ -270,19 +336,19 @@ export default function Packages() {
                   <span className="cond-check-bullet">✓</span>
                   <div>
                     <strong>Prior Confirmation:</strong>
-                    <span> Please confirm vehicle availability and written quote with Vicky.</span>
+                    <span> Please confirm vehicle availability and written quote with our team.</span>
                   </div>
                 </div>
               </div>
 
               <div className="conditions-action-row">
                 <a
-                  href="tel:9035897960"
+                  href="tel:7338140524"
                   className="cond-call-btn"
-                  aria-label="Call Vicky on 9035897960"
+                  aria-label="Call Helpline on 7338140524"
                 >
                   <Phone size={16} />
-                  <span>Call: +91 90358 97960</span>
+                  <span>Call: +91 73381 40524</span>
                 </a>
                 <a
                   href={`https://wa.me/919035897960?text=${encodeURIComponent(

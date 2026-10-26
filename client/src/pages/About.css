@@ -888,12 +888,22 @@
 }
 
 @media (max-width: 640px) {
+  .about-banner-navy {
+    padding: 2.25rem 0 1.75rem;
+  }
+
+  .about-palace-banner-img {
+    height: 190px;
+  }
+
   .pillars-cards-grid {
     grid-template-columns: 1fr;
+    gap: 1rem;
   }
 
   .about-services-5-row {
     grid-template-columns: 1fr;
+    gap: 0.75rem;
   }
 
   .milestones-grid-2x2 {
@@ -902,11 +912,13 @@
   }
 
   .trusted-partner-card {
-    padding: 2rem 1.5rem;
+    padding: 1.5rem 1.25rem;
+    border-radius: 14px;
   }
 
   .founder-message-card {
-    padding: 2rem 1.5rem;
+    padding: 1.5rem 1.25rem;
+    border-radius: 14px;
   }
 
   .about-banner-actions {

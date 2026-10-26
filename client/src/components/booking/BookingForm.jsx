@@ -149,25 +149,6 @@ export default function BookingForm({ initialValues = {} }) {
             />
             {errors.travelDate && <span className="b-err-text">{errors.travelDate}</span>}
           </div>
-
-          {/* WhatsApp Direct Dispatch Box (Green Panel) */}
-          <div className="b-wa-dispatch-card">
-            <div className="b-wa-notice-row">
-              <span className="wa-bubble-icon">💬</span>
-              <div className="wa-notice-text">
-                <span className="wa-small-tag">Your enquiry will be sent to</span>
-                <span className="wa-bold-phone">{BUSINESS_INFO.primaryPhone}</span>
-              </div>
-            </div>
-
-            <button type="submit" disabled={submitting} className="btn-continue-wa-green">
-              <span>{submitting ? 'Preparing...' : 'Continue on WhatsApp'}</span>
-            </button>
-
-            <p className="wa-footer-note">
-              You will be redirected to WhatsApp with your booking details.
-            </p>
-          </div>
         </div>
 
         {/* Right Column: Your Details */}
@@ -267,6 +248,27 @@ export default function BookingForm({ initialValues = {} }) {
               onChange={handleChange}
               className="b-input b-textarea"
             />
+          </div>
+        </div>
+
+        {/* WhatsApp Direct Dispatch Box (Green Panel) - Placed at the very end as final submit */}
+        <div className="booking-submit-fullwidth">
+          <div className="b-wa-dispatch-card">
+            <div className="b-wa-notice-row">
+              <span className="wa-bubble-icon">💬</span>
+              <div className="wa-notice-text">
+                <span className="wa-small-tag">Your enquiry will be sent to</span>
+                <span className="wa-bold-phone">{BUSINESS_INFO.primaryPhone}</span>
+              </div>
+            </div>
+
+            <button type="submit" disabled={submitting} className="btn-continue-wa-green">
+              <span>{submitting ? 'Preparing...' : 'Continue on WhatsApp'}</span>
+            </button>
+
+            <p className="wa-footer-note">
+              You will be redirected to WhatsApp with your booking details.
+            </p>
           </div>
         </div>
       </form>

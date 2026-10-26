@@ -50,28 +50,28 @@ export default function FloatingActions() {
       id: 'airport',
       label: '✈️ Airport Taxi (BLR)',
       reply:
-        '✈️ Bangalore Airport Transfers: Starting from ₹21/km. We provide 24/7 pickup and drop with real-time flight tracking so your driver is ready at the terminal!',
+        '✈️ Bangalore Airport Transfers: 4+1 Swift Dzire @ ₹21/km | 6+1 Innova Crysta @ ₹40/km. 24/7 pickup & drop with real-time flight tracking so your driver is ready at the terminal!',
       waText: 'Hello Vicky, I need an airport taxi transfer for Bangalore Airport (BLR).',
     },
     {
       id: 'local',
       label: '🚗 Local 4h / 8h Packages',
       reply:
-        '🚗 Local City Packages:\n• 4 Hours / 40 KM: ₹1,200\n• 8 Hours / 80 KM: ₹1,900 (Most Popular)\nExtra hour ₹150, extra km ₹13.',
+        '🚗 Local City Packages:\n• 4 Hours / 40 KM: ₹1,200\n• 8 Hours / 80 KM: ₹1,900 (Most Popular)\n4+1 Dzire ₹21/km local | 6+1 Innova ₹20/km local.',
       waText: 'Hello Vicky, I am interested in booking a local city package.',
     },
     {
       id: 'outstation',
       label: '🛣️ Outstation Trips',
       reply:
-        '🛣️ Outstation Travel: Indicative starting rate ₹13/km. Minimum average billing 300 km/day. One-way and round trips across Karnataka and South India!',
+        '🛣️ Outstation Highway Trips:\n• 4+1 Swift Dzire: ₹13/km (Driver beta ₹400)\n• 6+1 Innova Crysta: ₹22/km (Driver beta ₹500)\n• 12+1 Tempo Traveller: ₹22/km\nStandard 300 km/day minimum average billing across Karnataka & South India!',
       waText: 'Hello Vicky, I want to enquire about an outstation trip.',
     },
     {
       id: 'call',
-      label: '📞 Call Driver / Vicky',
+      label: '📞 Call Driver / Helpline',
       reply:
-        '📞 Direct 24/7 Helpline Numbers:\n• Primary: +91 90358 97960\n• Alternate: +91 73381 40524\nVicky is available round the clock!',
+        '📞 Direct 24/7 Helpline Numbers:\n• Primary: +91 73381 40524\n• Alternate: +91 90358 97960\nAvailable round the clock for immediate booking!',
       isCall: true,
     },
   ];
@@ -154,13 +154,13 @@ export default function FloatingActions() {
                     )}
                     {m.isCall && (
                       <div className="chatbot-call-options">
-                        <a href="tel:9035897960" className="chatbot-call-pill">
-                          <Phone size={14} />
-                          <span>Call 90358 97960</span>
-                        </a>
-                        <a href="tel:7338140524" className="chatbot-call-pill alt">
+                        <a href="tel:7338140524" className="chatbot-call-pill">
                           <Phone size={14} />
                           <span>Call 73381 40524</span>
+                        </a>
+                        <a href="tel:9035897960" className="chatbot-call-pill alt">
+                          <Phone size={14} />
+                          <span>Call 90358 97960</span>
                         </a>
                       </div>
                     )}
@@ -252,33 +252,33 @@ export default function FloatingActions() {
             </div>
             <div className="call-numbers-list">
               <a
-                href="tel:9035897960"
+                href="tel:7338140524"
                 className="call-dial-item primary"
-                aria-label="Call Vicky on 9035897960"
+                aria-label="Call Helpline on 7338140524"
               >
                 <div className="dial-item-icon">
                   <PhoneCall size={18} />
                 </div>
                 <div className="dial-item-text">
-                  <span className="dial-item-name">Vicky (Primary)</span>
-                  <span className="dial-item-num">+91 90358 97960</span>
+                  <span className="dial-item-name">Primary Helpline</span>
+                  <span className="dial-item-num">+91 73381 40524</span>
                 </div>
-                <span className="dial-tag">Active</span>
+                <span className="dial-tag">Active 24/7</span>
               </a>
 
               <a
-                href="tel:7338140524"
+                href="tel:9035897960"
                 className="call-dial-item secondary"
-                aria-label="Call Alternate on 7338140524"
+                aria-label="Call Vicky on 9035897960"
               >
                 <div className="dial-item-icon">
                   <Phone size={18} />
                 </div>
                 <div className="dial-item-text">
-                  <span className="dial-item-name">Alternate Support</span>
-                  <span className="dial-item-num">+91 73381 40524</span>
+                  <span className="dial-item-name">Vicky (Alternate)</span>
+                  <span className="dial-item-num">+91 90358 97960</span>
                 </div>
-                <span className="dial-tag">24/7</span>
+                <span className="dial-tag">Direct</span>
               </a>
             </div>
           </div>

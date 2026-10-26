@@ -30,6 +30,27 @@ exports.createContactMessage = async (req, res) => {
 
     try {
       savedContact = await Contact.create(payload);
+      // Also mirror into Enquiry model for the admin enquiry inbox & upsert customer
+      try {
+        const Enquiry = require('../models/Enquiry');
+        const Customer = require('../models/Customer');
+        await Enquiry.create({
+          customerName: payload.name,
+          phoneNumber: payload.phone,
+          email: payload.email,
+          tripType: payload.subject,
+          message: payload.message,
+          source: 'contact_page',
+          status: 'new',
+        });
+        await Customer.findOneAndUpdate(
+          { phoneNumber: payload.phone },
+          { $set: { name: payload.name, email: payload.email } },
+          { upsert: true }
+        );
+      } catch (mirrorErr) {
+        console.warn('Mirror to Enquiry error:', mirrorErr.message);
+      }
     } catch (err) {
       console.warn('[Contact DB Warning] Saving in-memory:', err.message);
       dbPersisted = false;

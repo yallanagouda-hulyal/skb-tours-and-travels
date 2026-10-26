@@ -8,10 +8,10 @@ export const BUSINESS_INFO = {
   profileName: 'SKB Touran Travels',
   owner: 'Vicky',
   tagline: 'Your Journey, Our Priority',
-  primaryPhone: '9035897960',
-  primaryPhoneDisplay: '+91 9035897960',
-  alternatePhone: '7338140524',
-  alternatePhoneDisplay: '+91 7338140524',
+  primaryPhone: '7338140524',
+  primaryPhoneDisplay: '+91 73381 40524',
+  alternatePhone: '9035897960',
+  alternatePhoneDisplay: '+91 90358 97960',
   email: 'vickymegha903@gmail.com',
   location: {
     area: 'Airport Area',
@@ -46,7 +46,7 @@ export const BUSINESS_INFO = {
       title: 'Outstation Journeys',
       shortDesc: 'Reliable one-way drops and round-trip highway journeys across Karnataka and neighbouring states.',
       icon: 'Compass',
-      badge: '₹13 / KM Indicative',
+      badge: '₹13 - ₹22 / KM',
     },
     {
       id: 'group',

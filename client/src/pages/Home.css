@@ -2107,3 +2107,21 @@
     padding: 1.5rem 1.25rem;
   }
 }
+
+@media (max-width: 480px) {
+  .hero-airport-fleet-img {
+    height: 190px;
+  }
+  .hero-booking-quick-card {
+    padding: 1.25rem 0.95rem;
+    border-radius: 14px;
+  }
+  .journey-cta-navy-card {
+    padding: 1.75rem 1rem;
+    border-radius: 14px;
+  }
+  .btn-search-enquire-gold {
+    font-size: 0.92rem;
+    padding: 0.75rem;
+  }
+}
